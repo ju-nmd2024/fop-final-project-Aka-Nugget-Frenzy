@@ -35,7 +35,14 @@ function oppGuy(x, y) {
   pop();
 }
 
-function jibsGuy(x, y) {}
+function jibsGuy(x, y) {
+  push();
+  stroke(0);
+  strokeWeight(2);
+  fill(0, 255, 0);
+  square(x, y, 50);
+  pop();
+}
 
 function draw() {
   gameFloor(0, 350);
