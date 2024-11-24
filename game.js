@@ -39,7 +39,7 @@ function jibsGuy(x, y) {
   push();
   stroke(0);
   strokeWeight(2);
-  fill(0, 255, 0);
+  fill(100, 255, 100);
   square(x, y, 50);
   pop();
 }
@@ -48,4 +48,5 @@ function draw() {
   gameFloor(0, 350);
   yellowGuy(100, 300);
   oppGuy(200, 300);
+  jibsGuy(300, 300);
 }
