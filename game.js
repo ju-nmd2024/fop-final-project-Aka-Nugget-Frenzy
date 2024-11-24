@@ -44,9 +44,21 @@ function jibsGuy(x, y) {
   pop();
 }
 
+function nugget(x, y) {
+  fill(255, 165, 0);
+  ellipse(x, y, 30);
+}
+
+function beer(x, y) {
+  fill(185, 165, 0);
+  ellipse(x, y, 15, 30);
+}
+
 function draw() {
   gameFloor(0, 350);
   yellowGuy(100, 300);
   oppGuy(200, 300);
   jibsGuy(300, 300);
+  nugget(400, 320);
+  beer(450, 320);
 }
