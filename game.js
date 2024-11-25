@@ -6,11 +6,6 @@
 //nugget
 //beer
 
-function setup() {
-  createCanvas(1200, 675);
-  background(0, 200, 250);
-}
-
 function gameFloor(x, y) {
   noStroke();
   fill(0, 255, 0);
@@ -52,6 +47,11 @@ function nugget(x, y) {
 function beer(x, y) {
   fill(185, 165, 0);
   ellipse(x, y, 15, 30);
+}
+
+function setup() {
+  createCanvas(1200, 675);
+  background(0, 200, 250);
 }
 
 function draw() {
