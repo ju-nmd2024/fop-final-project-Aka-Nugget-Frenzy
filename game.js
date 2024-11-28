@@ -6,12 +6,12 @@
 //nugget
 //beer
 var state = "game";
-var floor = 500;
+var theFloor = 500;
 var resultYes;
 var copX = 100;
 var copY = 450;
 var yellowX = 200;
-var yellowY = floor - 50;
+var yellowY = theFloor - 50;
 var yellowYSpeed = 0;
 var yellowXSpeed = 0;
 var jumpReady = true;
@@ -39,7 +39,7 @@ function setup() {
 
 function movement() {
   yellowY = yellowY + yellowYSpeed;
-  if (yellowY >= floor - 50) {
+  if (yellowY >= theFloor - 50) {
     jumpReady = true;
     yellowYSpeed = 0;
   } else {
@@ -110,11 +110,11 @@ function menuScreen() {}
 function gameScreen() {
   image(ground_img, 10, 100, 10, 10);
   // grass(100, 100);
-  copEndPos = createVector(yellowX, yellowY);
+  copEndPos = new createVector(yellowX, yellowY);
   distToTravel = p5.Vector.sub(copEndPos, copPosition);
   distToMovePerMs = p5.Vector.div(distToTravel, moveDurationMs);
   background(0, 200, 250);
-  gameFloor(0, floor);
+  gameFloor(0, theFloor);
   yellowGuy(yellowX, yellowY);
   oppGuy(copPosition.x, copPosition.y);
   movement();
