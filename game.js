@@ -13,13 +13,13 @@ var copY = 450;
 var yellowX = 200;
 var yellowY = 450;
 
-const copStartPos = createVector(copStartX, copStartY);
+const copStartPos = createVector(copX, copY);
 var copPosition = copStartPos.copy();
 var copEndPos = createVector(yellowX, yellowY);
 
 const stopAtDist = 30; //so the cop stops before going into yellow guy
 var distToTravel = p5.Vector.sub(copEndPos, copStartPos); //calculates how much the cop needs to travel to yellow guy
-const moveDurationS = 3; // if you stand still, the cop will catch you in this many seconds
+const moveDurationS = 1; // if you stand still, the cop will catch you in this many seconds
 const moveDurationMs = moveDurationS * 1000;
 var distToMovePerMs = p5.Vector.div(distToTravel, moveDurationMs);
 var currentlyMoving = true;
@@ -82,7 +82,7 @@ function gameScreen() {
   background(0, 200, 250);
   gameFloor(0, floor);
   yellowGuy(yellowX, yellowY);
-  oppGuy(copPosition.x, 100);
+  oppGuy(copPosition.x, copPosition.y);
 
   if (currentlyMoving) {
     var thisFrameMovement = p5.Vector.mult(distToMovePerMs, deltaTime);
