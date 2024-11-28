@@ -16,8 +16,8 @@ var yellowYSpeed = 0;
 var yellowXSpeed = 0;
 var jumpReady = true;
 
-const copStartPos = createVector(copX, copY);
-var copPosition = copStartPos.copy();
+var copStartPos;
+var copPosition;
 var copEndPos;
 
 const stopAtDist = 30; //so the cop stops before going into yellow guy
@@ -35,6 +35,8 @@ function preload() {
 function setup() {
   createCanvas(1200, 675);
   frameRate(60);
+  copStartPos = createVector(copX, copY);
+  copPosition = copStartPos.copy();
 }
 
 function movement() {
