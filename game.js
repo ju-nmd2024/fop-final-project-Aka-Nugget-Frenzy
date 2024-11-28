@@ -5,6 +5,16 @@
 //jibsGuy
 //nugget
 //beer
+var state = "game";
+var floor = 500;
+var resultYes;
+var copX = 100;
+var copY = 450;
+var yellowX = 200;
+var yellowY = 450;
+var copStartPos = createVector(copStartX, copStartY);
+var copEndPos = createVector(yellowX, yellowY);
+var level = [1, 2, 3, 4, 5];
 
 function preload() {
   ground_img = loadImage("images/grasspres_0");
@@ -12,7 +22,7 @@ function preload() {
 
 function setup() {
   createCanvas(1200, 675);
-  background(0, 200, 250);
+  frameRate(60);
 }
 
 function gameFloor(x, y) {
@@ -58,11 +68,21 @@ function beer(x, y) {
   ellipse(x, y, 15, 30);
 }
 
+function menuScreen() {}
+function gameScreen() {
+  background(0, 200, 250);
+  gameFloor(0, floor);
+  yellowGuy(yellowX, yellowY);
+  oppGuy(copX, copY);
+}
+function resultScreen(resultYes) {}
+
 function draw() {
-  gameFloor(0, 350);
-  yellowGuy(100, 300);
-  oppGuy(200, 300);
-  jibsGuy(300, 300);
-  nugget(400, 320);
-  beer(450, 320);
+  if (state === "menu") {
+    menuScreen();
+  } else if (state === "game") {
+    gameScreen();
+  } else if (state === "result") {
+    resultScreen(resultYes);
+  }
 }
