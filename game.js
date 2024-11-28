@@ -11,17 +11,20 @@ var resultYes;
 var copX = 100;
 var copY = 450;
 var yellowX = 200;
-var yellowY = 450;
+var yellowY = floor - 50;
+var yellowYSpeed = 0;
+var yellowXSpeed = 0;
+var jumpReady = true;
 
 const copStartPos = createVector(copX, copY);
 var copPosition = copStartPos.copy();
-var copEndPos = createVector(yellowX, yellowY);
+var copEndPos;
 
 const stopAtDist = 30; //so the cop stops before going into yellow guy
-var distToTravel = p5.Vector.sub(copEndPos, copStartPos); //calculates how much the cop needs to travel to yellow guy
+var distToTravel; //calculates how much the cop needs to travel to yellow guy
 const moveDurationS = 1; // if you stand still, the cop will catch you in this many seconds
 const moveDurationMs = moveDurationS * 1000;
-var distToMovePerMs = p5.Vector.div(distToTravel, moveDurationMs);
+var distToMovePerMs;
 var currentlyMoving = true;
 var level = [1, 2, 3, 4, 5];
 
@@ -34,6 +37,31 @@ function setup() {
   frameRate(60);
 }
 
+function movement() {
+  yellowY = yellowY + yellowYSpeed;
+  yellowX = yellowX + yellowXSpeed;
+  if (yellowY >= floor - 50) {
+    jumpReady = true;
+    yellowYSpeed = 0;
+  } else {
+    jumpReady = false;
+    yellowYSpeed += 2;
+  }
+
+  if (jumpReady == true) {
+    if (keyIsPressed) {
+      if (key == " ") {
+        yellowYSpeed -= 20;
+      }
+    }
+  }
+
+  if (keyIsPressed) {
+    if (key == "a") {
+      yellowYSpeed -= 20;
+    }
+  }
+}
 function gameFloor(x, y) {
   noStroke();
   fill(0, 255, 0);
@@ -79,10 +107,14 @@ function beer(x, y) {
 
 function menuScreen() {}
 function gameScreen() {
+  copEndPos = createVector(yellowX, yellowY);
+  distToTravel = p5.Vector.sub(copEndPos, copStartPos);
+  distToMovePerMs = p5.Vector.div(distToTravel, moveDurationMs);
   background(0, 200, 250);
   gameFloor(0, floor);
   yellowGuy(yellowX, yellowY);
   oppGuy(copPosition.x, copPosition.y);
+  movement();
 
   if (currentlyMoving) {
     var thisFrameMovement = p5.Vector.mult(distToMovePerMs, deltaTime);
