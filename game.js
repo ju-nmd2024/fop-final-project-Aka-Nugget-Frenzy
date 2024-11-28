@@ -29,7 +29,7 @@ var currentlyMoving = true;
 var level = [1, 2, 3, 4, 5];
 
 function preload() {
-  ground_img = loadImage("images/grasspres_0");
+  ground_img = loadImage("images/grasspres_0.png");
 }
 
 function setup() {
@@ -100,9 +100,16 @@ function beer(x, y) {
   fill(185, 165, 0);
   ellipse(x, y, 15, 30);
 }
-
+function grass(x, y) {
+  push();
+  translate(x, y);
+  image(ground_img, 0, 0, 1, 1);
+  pop();
+}
 function menuScreen() {}
 function gameScreen() {
+  image(ground_img, 10, 100, 10, 10);
+  // grass(100, 100);
   copEndPos = createVector(yellowX, yellowY);
   distToTravel = p5.Vector.sub(copEndPos, copPosition);
   distToMovePerMs = p5.Vector.div(distToTravel, moveDurationMs);
