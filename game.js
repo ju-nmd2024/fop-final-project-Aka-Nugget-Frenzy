@@ -6,7 +6,7 @@
 //nugget
 //beer
 var grassX = 300;
-var grassY = 350;
+var grassY = 400;
 var state = "game";
 var theFloor = 500;
 var resultYes;
@@ -41,6 +41,8 @@ function setup() {
 }
 
 function movement() {
+  //console.log("yellow " + yellowY);
+  //console.log("grass " + (grassY+50));
   yellowY = yellowY + yellowYSpeed;
   if (yellowY >= theFloor - 50) {
     jumpReady = true;
@@ -58,13 +60,13 @@ function movement() {
   if (
     yellowX + 50 >= grassX &&
     yellowX <= grassX + 50 &&
-    yellowY <= grassY + 50 &&
-    yellowY + 50 >= grassY
+    yellowY >= grassY - 50 &&
+    yellowY + 49 <= grassY
   ) {
     yellowY = grassY - 50;
     yellowYSpeed = 0;
     jumpReady = true;
-    console.log(grassX);
+    console.log("blabla");
   }
 }
 function keyPressed() {
