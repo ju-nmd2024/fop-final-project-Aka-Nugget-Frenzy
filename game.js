@@ -20,9 +20,9 @@ var copStartPos;
 var copPosition;
 var copEndPos;
 
-const stopAtDist = 30; //so the cop stops before going into yellow guy
+const stopAtDist = 50; //so the cop stops before going into yellow guy
 var distToTravel; //calculates how much the cop needs to travel to yellow guy
-const moveDurationS = 1.5; // if you stand still, the cop will catch you in this many seconds
+const moveDurationS = 1; // if you stand still, the cop will catch you in this many seconds
 const moveDurationMs = moveDurationS * 1000;
 var distToMovePerMs;
 var currentlyMoving = true;
@@ -105,7 +105,6 @@ function grass(x, y) {
   this.y = y;
   translate(x, y);
   image(ground_img, 0, 0, 50, 50);
-  ``;
 }
 function menuScreen() {}
 function gameScreen() {
