@@ -5,6 +5,8 @@
 //jibsGuy
 //nugget
 //beer
+var a;
+var allGrass = [];
 var grassX = 300;
 var grassY = 400;
 var state = "game";
@@ -35,10 +37,15 @@ function preload() {
   ground_img = loadImage("images/grasspres_0.png");
 }
 function setup() {
-  createCanvas(1200, 675);
+  let canvas = createCanvas(1200, 675);
   frameRate(60);
   copStartPos = createVector(copX, copY);
   copPosition = copStartPos.copy();
+
+  for (let i = 1; i < 10; i++) {
+    allGrass[i] = new grassa(100, 100);
+    a = a + 50;
+  }
 }
 
 function movement() {
@@ -53,8 +60,8 @@ function movement() {
     jumpReady = false;
     yellowYSpeed += 2;
     if (
-      yellowX + 50 >= grassX &&
-      yellowX <= grassX + 50 &&
+      yellowX + 50 >= grassX + a &&
+      yellowX <= grassX + a + 50 &&
       yellowY >= grassY - 60 &&
       yellowY + 50 <= grassY &&
       yellowY >= lastYellowY
@@ -62,7 +69,6 @@ function movement() {
       yellowY = grassY - 50;
       yellowYSpeed = 0;
       jumpReady = true;
-      console.log("blabla");
     }
     lastYellowY = yellowY;
   }
@@ -125,6 +131,7 @@ function grass(x, y) {
 }
 function menuScreen() {}
 function gameScreen() {
+  a = 0;
   copEndPos = createVector(yellowX, yellowY);
   distToTravel = p5.Vector.sub(copEndPos, copPosition);
   distToMovePerMs = p5.Vector.div(distToTravel, moveDurationMs);
@@ -132,9 +139,10 @@ function gameScreen() {
   gameFloor(0, theFloor);
   yellowGuy(yellowX, yellowY);
   oppGuy(copPosition.x, copPosition.y);
-  movement();
-  grass(grassX, grassY);
 
+  //grass(grassX + 100, grassY);
+
+  movement();
   if (currentlyMoving) {
     var thisFrameMovement = p5.Vector.mult(distToMovePerMs, deltaTime);
     copPosition.add(thisFrameMovement);
@@ -165,5 +173,16 @@ function draw() {
     gameScreen();
   } else if (state === "result") {
     resultScreen(resultYes);
+  }
+}
+
+class grassa {
+  constructor(tX, tY) {
+    this.x = tX;
+    this.y = tY;
+  }
+  display() {
+    //translate(this.x, this.y);
+    image(ground_img, this.x, this.y, 50, 50);
   }
 }
