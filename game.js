@@ -14,6 +14,7 @@ var copX = 100;
 var copY = 450;
 var yellowX = 200;
 var yellowY = theFloor - 50;
+var lastYellowY = yellowY;
 var yellowYSpeed = 0;
 var yellowXSpeed = 0;
 var jumpReady = true;
@@ -51,22 +52,24 @@ function movement() {
   } else {
     jumpReady = false;
     yellowYSpeed += 2;
+    if (
+      yellowX + 50 >= grassX &&
+      yellowX <= grassX + 50 &&
+      yellowY >= grassY - 60 &&
+      yellowY + 50 <= grassY &&
+      yellowY >= lastYellowY
+    ) {
+      yellowY = grassY - 50;
+      yellowYSpeed = 0;
+      jumpReady = true;
+      console.log("blabla");
+    }
+    lastYellowY = yellowY;
   }
   if (keyIsDown(65)) {
     yellowX -= 5;
   } else if (keyIsDown(68)) {
     yellowX += 5;
-  }
-  if (
-    yellowX + 50 >= grassX &&
-    yellowX <= grassX + 50 &&
-    yellowY >= grassY - 50 &&
-    yellowY + 49 <= grassY
-  ) {
-    yellowY = grassY - 50;
-    yellowYSpeed = 0;
-    jumpReady = true;
-    console.log("blabla");
   }
 }
 function keyPressed() {
