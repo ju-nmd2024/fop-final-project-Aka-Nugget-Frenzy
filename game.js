@@ -35,16 +35,17 @@ var level = [1, 2, 3, 4, 5];
 
 function preload() {
   ground_img = loadImage("images/grasspres_0.png");
+  copStartPos = createVector(copX, copY);
+  copPosition = copStartPos.copy();
 }
 function setup() {
   let canvas = createCanvas(1200, 675);
+  //canvas.position(yellowX * -1 + 600, yellowY * -1 + 337.5);
   frameRate(60);
-  copStartPos = createVector(copX, copY);
-  copPosition = copStartPos.copy();
 
-  for (let i = 1; i < 10; i++) {
+  for (let i = 0; i < 10; i++) {
     allGrass[i] = new grassa(100, 100);
-    a = a + 50;
+    // a = a + 50;
   }
 }
 
@@ -131,6 +132,7 @@ function grass(x, y) {
 }
 function menuScreen() {}
 function gameScreen() {
+  setup();
   a = 0;
   copEndPos = createVector(yellowX, yellowY);
   distToTravel = p5.Vector.sub(copEndPos, copPosition);
@@ -139,8 +141,6 @@ function gameScreen() {
   gameFloor(0, theFloor);
   yellowGuy(yellowX, yellowY);
   oppGuy(copPosition.x, copPosition.y);
-
-  //grass(grassX + 100, grassY);
 
   movement();
   if (currentlyMoving) {
@@ -153,7 +153,6 @@ function gameScreen() {
   ) {
     currentlyMoving = false;
   }
-
   // if (
   //   yellowGuy.x >= grass.x &&
   //   yellowGuy.x <= grass.x + 50 &&
@@ -163,6 +162,9 @@ function gameScreen() {
   //   jumpReady = true;
   //   yellowYSpeed = 0;
   // }
+  for (let i = 0; i < allGrass.length; i++) {
+    allGrass[i].display();
+  }
 }
 function resultScreen(resultYes) {}
 
@@ -182,7 +184,7 @@ class grassa {
     this.y = tY;
   }
   display() {
-    //translate(this.x, this.y);
-    image(ground_img, this.x, this.y, 50, 50);
+    translate(this.x, this.y);
+    image(ground_img, 0, 0, 50, 50);
   }
 }
