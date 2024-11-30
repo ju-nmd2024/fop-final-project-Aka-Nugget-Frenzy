@@ -44,8 +44,8 @@ function setup() {
   frameRate(60);
 
   for (let i = 0; i < 10; i++) {
-    allGrass[i] = new grassa(100, 100);
-    // a = a + 50;
+    allGrass[i] = new grassa(300 + a, 400 - a);
+    a = a + 50;
   }
 }
 
@@ -60,19 +60,13 @@ function movement() {
   } else {
     jumpReady = false;
     yellowYSpeed += 2;
-    if (
-      yellowX + 50 >= grassX + a &&
-      yellowX <= grassX + a + 50 &&
-      yellowY >= grassY - 60 &&
-      yellowY + 50 <= grassY &&
-      yellowY >= lastYellowY
-    ) {
-      yellowY = grassY - 50;
-      yellowYSpeed = 0;
-      jumpReady = true;
-    }
-    lastYellowY = yellowY;
   }
+  for (let i = 0; i < allGrass.length; i++) {
+    allGrass[i].collide(yellowX, yellowY, lastYellowY);
+    allGrass[i].display();
+  }
+  lastYellowY = yellowY;
+
   if (keyIsDown(65)) {
     yellowX -= 5;
   } else if (keyIsDown(68)) {
@@ -153,18 +147,6 @@ function gameScreen() {
   ) {
     currentlyMoving = false;
   }
-  // if (
-  //   yellowGuy.x >= grass.x &&
-  //   yellowGuy.x <= grass.x + 50 &&
-  //   yellowGuy.y >= grass.y
-  // ) {
-  //   yellowGuy.y = yellowGuy.y;
-  //   jumpReady = true;
-  //   yellowYSpeed = 0;
-  // }
-  for (let i = 0; i < allGrass.length; i++) {
-    allGrass[i].display();
-  }
 }
 function resultScreen(resultYes) {}
 
@@ -184,7 +166,22 @@ class grassa {
     this.y = tY;
   }
   display() {
+    push();
     translate(this.x, this.y);
     image(ground_img, 0, 0, 50, 50);
+    pop();
+  }
+  collide(theX, theY, lastTheY) {
+    if (
+      theX + 50 >= this.x &&
+      theX <= this.x + 50 &&
+      theY >= this.y - 60 &&
+      theY + 50 <= this.y &&
+      theY >= lastTheY
+    ) {
+      yellowY = this.y - 50;
+      yellowYSpeed = 0;
+      jumpReady = true;
+    }
   }
 }
