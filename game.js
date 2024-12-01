@@ -5,7 +5,7 @@
 //jibsGuy
 //nugget
 //beer
-var a;
+var a = 0;
 var allGrass = [];
 var grassX = 300;
 var grassY = 400;
@@ -50,9 +50,7 @@ function setup() {
 }
 
 function movement() {
-  //console.log("yellow " + yellowY);
-  //console.log("grass " + (grassY+50));
-  theFloor = theFloor - yellowYSpeed;
+  yellowY = yellowY + yellowYSpeed;
   if (yellowY >= theFloor - 50) {
     jumpReady = true;
     yellowYSpeed = 0;
@@ -61,8 +59,17 @@ function movement() {
     jumpReady = false;
     yellowYSpeed += 2;
   }
-
+  for (let i = 0; i < allGrass.length; i++) {
+    allGrass[i].collide(yellowX, yellowY, lastYellowY);
+    allGrass[i].display();
+  }
   lastYellowY = yellowY;
+  if (keyIsDown(65)) {
+    yellowX -= 5;
+  }
+  if (keyIsDown(68)) {
+    yellowX += 5;
+  }
 }
 function keyPressed() {
   if (key == " " && jumpReady == true) {
@@ -145,11 +152,6 @@ function draw() {
     menuScreen();
   } else if (state === "game") {
     gameScreen();
-    for (let i = 0; i < allGrass.length; i++) {
-      allGrass[i].collide(yellowX, yellowY, lastYellowY);
-      allGrass[i].move();
-      allGrass[i].display();
-    }
   } else if (state === "result") {
     resultScreen(resultYes);
   }
@@ -177,14 +179,6 @@ class grassa {
       yellowY = this.y - 50;
       yellowYSpeed = 0;
       jumpReady = true;
-    }
-  }
-  move() {
-    if (keyIsDown(65)) {
-      this.x += 5;
-    }
-    if (keyIsDown(68)) {
-      this.x -= 5;
     }
   }
 }
