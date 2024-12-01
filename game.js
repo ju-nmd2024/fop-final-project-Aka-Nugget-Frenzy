@@ -44,7 +44,7 @@ function setup() {
   frameRate(60);
 
   for (let i = 0; i < 10; i++) {
-    allGrass[i] = new grassa(300 + a, 400 - a);
+    allGrass[i] = new grass(300 + a, 400 - a);
     a = a + 50;
   }
 }
@@ -118,10 +118,6 @@ function beer(x, y) {
   fill(185, 165, 0);
   ellipse(x, y, 15, 30);
 }
-function grass(x, y) {
-  translate(x, y);
-  image(ground_img, 0, 0, 50, 50);
-}
 function menuScreen() {}
 function gameScreen() {
   a = 0;
@@ -157,7 +153,7 @@ function draw() {
   }
 }
 
-class grassa {
+class grass {
   constructor(tX, tY) {
     this.x = tX;
     this.y = tY;
