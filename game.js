@@ -39,7 +39,7 @@ function preload() {
   copPosition = copStartPos.copy();
 }
 function setup() {
-  let canvas = createCanvas(1200, 675);
+  createCanvas(1200, 675);
   //canvas.position(yellowX * -1 + 600, yellowY * -1 + 337.5);
   frameRate(60);
 
@@ -52,7 +52,7 @@ function setup() {
 function movement() {
   //console.log("yellow " + yellowY);
   //console.log("grass " + (grassY+50));
-  yellowY = yellowY + yellowYSpeed;
+  theFloor = theFloor - yellowYSpeed;
   if (yellowY >= theFloor - 50) {
     jumpReady = true;
     yellowYSpeed = 0;
@@ -61,17 +61,8 @@ function movement() {
     jumpReady = false;
     yellowYSpeed += 2;
   }
-  for (let i = 0; i < allGrass.length; i++) {
-    allGrass[i].collide(yellowX, yellowY, lastYellowY);
-    allGrass[i].display();
-  }
-  lastYellowY = yellowY;
 
-  if (keyIsDown(65)) {
-    yellowX -= 5;
-  } else if (keyIsDown(68)) {
-    yellowX += 5;
-  }
+  lastYellowY = yellowY;
 }
 function keyPressed() {
   if (key == " " && jumpReady == true) {
@@ -126,7 +117,6 @@ function grass(x, y) {
 }
 function menuScreen() {}
 function gameScreen() {
-  setup();
   a = 0;
   copEndPos = createVector(yellowX, yellowY);
   distToTravel = p5.Vector.sub(copEndPos, copPosition);
@@ -155,6 +145,11 @@ function draw() {
     menuScreen();
   } else if (state === "game") {
     gameScreen();
+    for (let i = 0; i < allGrass.length; i++) {
+      allGrass[i].collide(yellowX, yellowY, lastYellowY);
+      allGrass[i].move();
+      allGrass[i].display();
+    }
   } else if (state === "result") {
     resultScreen(resultYes);
   }
@@ -167,8 +162,8 @@ class grassa {
   }
   display() {
     push();
-    translate(this.x, this.y);
-    image(ground_img, 0, 0, 50, 50);
+    //translate();
+    image(ground_img, this.x, this.y, 50, 50);
     pop();
   }
   collide(theX, theY, lastTheY) {
@@ -182,6 +177,14 @@ class grassa {
       yellowY = this.y - 50;
       yellowYSpeed = 0;
       jumpReady = true;
+    }
+  }
+  move() {
+    if (keyIsDown(65)) {
+      this.x += 5;
+    }
+    if (keyIsDown(68)) {
+      this.x -= 5;
     }
   }
 }
