@@ -40,7 +40,6 @@ function preload() {
 }
 function setup() {
   createCanvas(1200, 675);
-  //canvas.position(yellowX * -1 + 600, yellowY * -1 + 337.5);
   frameRate(60);
 
   for (let i = 0; i < 10; i++) {
@@ -160,8 +159,8 @@ class grass {
   }
   display() {
     push();
-    //translate();
-    image(ground_img, this.x, this.y, 50, 50);
+    translate(this.x, this.y);
+    image(ground_img, 0, 0, 50, 50);
     pop();
   }
   collide(theX, theY, lastTheY) {
