@@ -67,8 +67,9 @@ function setup() {
     allNugget[i] = new nugget(500 + a, 470);
     a = a + 50;
   }
+  a = 0;
   for (let i = 0; i < 5; i++) {
-    allBeer[i] = new beer(700 + a, 470);
+    allBeer[i] = new beer(800 + a, 470);
     a = a + 50;
   }
 }
