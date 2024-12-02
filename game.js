@@ -7,6 +7,7 @@
 //beer
 var a = 0;
 var allGrass = [];
+var allNugget = [];
 var grassX = 300;
 var grassY = 400;
 var state = "game";
@@ -60,6 +61,11 @@ function setup() {
     allGrass[i] = new grass(300 + a, 400 - a);
     a = a + 50;
   }
+  a = 0;
+  for (let i = 0; i < 5; i++) {
+    allNugget[i] = new nugget(500 + a, 470);
+    a = a + 50;
+  }
 }
 
 function movement() {
@@ -75,6 +81,10 @@ function movement() {
   for (let i = 0; i < allGrass.length; i++) {
     allGrass[i].collide(yellowX, yellowY, lastYellowY);
     allGrass[i].display();
+  }
+  for (let i = 0; i < allNugget.length; i++) {
+    allNugget[i].collide(yellowX, yellowY);
+    allNugget[i].display();
   }
   lastYellowY = yellowY;
   if (keyIsDown(65)) {
@@ -122,11 +132,6 @@ function jibsGuy(x, y) {
   pop();
 }
 
-function nugget(nugX, nugY, nugWidth, nugHeight) {
-  fill(255, 165, 0);
-  ellipse(nugX, nugY, nugWidth, nugHeight);
-}
-
 function beer(beerX, beerY, beerWidth, beerHeight) {
   fill(185, 165, 0);
   ellipse(beerX, beerY, beerWidth, beerHeight);
@@ -155,40 +160,39 @@ function gameScreen() {
     currentlyMoving = false;
   }
 
-  if (
-    yellowGuy.x >= grass.x &&
-    yellowGuy.x <= grass.x + 50 &&
-    yellowGuy.y >= grass.y
-  ) {
-    yellowGuy.y = yellowGuy.y;
-    jumpReady = true;
-    yellowYSpeed = 0;
-  }
+  // if (
+  //   yellowGuy.x >= grass.x &&
+  //   yellowGuy.x <= grass.x + 50 &&
+  //   yellowGuy.y >= grass.y
+  // ) {
+  //   yellowGuy.y = yellowGuy.y;
+  //   jumpReady = true;
+  //   yellowYSpeed = 0;
+  // }
 
   //nugget collision
-  nugget(nugX, nugY, nugWidth, nugHeight);
-  if (
-    yellowX >= nugX - nugWidth / 2 &&
-    yellowX <= nugX + nugWidth / 2 &&
-    yellowY >= nugY - nugHeight / 2 &&
-    yellowY <= nugY + nugHeight / 2
-  ) {
-    //yellowguy hits nugget
-    score = score + 1;
-    nugX = -1000; //move nugget offscreen
-    console.log(nugX);
-  }
+  // allnugget(nugX, nugY, nugWidth, nugHeight);
+  // if (
+  //   yellowX + 50 >= nugX &&
+  //   yellowX <= nugX &&
+  //   yellowY <= nugY &&
+  //   yellowY + 50 >= nugY
+  // ) {
+  //   //yellowguy hits nugget
+  //   score = score + 1;
+  //   nugX = -1000; //move nugget offscreen
+  // }
 
   //beer collision
   beer(beerX, beerY, beerWidth, beerHeight);
   if (
-    yellowX >= beerX - beerWidth / 2 &&
-    yellowX <= beerX + beerWidth / 2 &&
-    // yellowY >= beerY - beerHeight / 2 &&
-    yellowY <= beerY + beerHeight / 2
+    yellowX + 50 >= beerX &&
+    yellowX <= beerX &&
+    yellowY + 50 >= beerY &&
+    yellowY <= beerY
   ) {
     //yellowguy hits beer
-    yellowXSpeed = yellowXSpeed - 1000;
+    yellowXSpeed = yellowXSpeed - 10;
     beerX = -1000; //move beer offscreen
     console.log(yellowXSpeed);
   }
@@ -238,6 +242,31 @@ class grass {
       yellowY = this.y - 50;
       yellowYSpeed = 0;
       jumpReady = true;
+    }
+  }
+}
+
+class nugget {
+  constructor(nX, nY) {
+    this.x = nX;
+    this.y = nY;
+  }
+  display() {
+    push();
+    fill(255, 165, 0);
+    translate(this.x, this.y);
+    ellipse(0, 0, nugWidth, nugHeight);
+    pop();
+  }
+  collide(theX, theY) {
+    if (
+      theX + 50 >= this.x &&
+      theX <= this.x &&
+      theY <= this.y &&
+      theY + 50 >= this.y
+    ) {
+      score = score + 1;
+      this.x = -1000;
     }
   }
 }
