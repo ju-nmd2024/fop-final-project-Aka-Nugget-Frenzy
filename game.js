@@ -33,15 +33,29 @@ var distToMovePerMs;
 var currentlyMoving = true;
 var level = [1, 2, 3, 4, 5];
 
+//nugget
+var nugX = 500;
+var nugY = 470;
+var nugWidth = 40;
+var nugHeight = 50;
+
+//beer
+var beerX = 650;
+var beerY = 470;
+var beerWidth = 15;
+var beerHeight = 30;
+
+//counters
+var score = 0;
+
 function preload() {
   ground_img = loadImage("images/grasspres_0.png");
-  copStartPos = createVector(copX, copY);
-  copPosition = copStartPos.copy();
 }
 function setup() {
   createCanvas(1200, 675);
   frameRate(60);
-
+  copStartPos = createVector(copX, copY);
+  copPosition = copStartPos.copy();
   for (let i = 0; i < 10; i++) {
     allGrass[i] = new grass(300 + a, 400 - a);
     a = a + 50;
@@ -108,17 +122,19 @@ function jibsGuy(x, y) {
   pop();
 }
 
-function nugget(x, y) {
+function nugget(nugX, nugY, nugWidth, nugHeight) {
   fill(255, 165, 0);
-  ellipse(x, y, 30);
+  ellipse(nugX, nugY, nugWidth, nugHeight);
 }
 
-function beer(x, y) {
+function beer(beerX, beerY, beerWidth, beerHeight) {
   fill(185, 165, 0);
-  ellipse(x, y, 15, 30);
+  ellipse(beerX, beerY, beerWidth, beerHeight);
 }
+
 function menuScreen() {}
 function gameScreen() {
+  // grass(100, 100);
   a = 0;
   copEndPos = createVector(yellowX, yellowY);
   distToTravel = p5.Vector.sub(copEndPos, copPosition);
@@ -127,7 +143,6 @@ function gameScreen() {
   gameFloor(0, theFloor);
   yellowGuy(yellowX, yellowY);
   oppGuy(copPosition.x, copPosition.y);
-
   movement();
   if (currentlyMoving) {
     var thisFrameMovement = p5.Vector.mult(distToMovePerMs, deltaTime);
@@ -139,7 +154,56 @@ function gameScreen() {
   ) {
     currentlyMoving = false;
   }
+
+  if (
+    yellowGuy.x >= grass.x &&
+    yellowGuy.x <= grass.x + 50 &&
+    yellowGuy.y >= grass.y
+  ) {
+    yellowGuy.y = yellowGuy.y;
+    jumpReady = true;
+    yellowYSpeed = 0;
+  }
+
+  //nugget collision
+  nugget(nugX, nugY, nugWidth, nugHeight);
+  if (
+    yellowX >= nugX - nugWidth / 2 &&
+    yellowX <= nugX + nugWidth / 2 &&
+    yellowY >= nugY - nugHeight / 2 &&
+    yellowY <= nugY + nugHeight / 2
+  ) {
+    //yellowguy hits nugget
+    score = score + 1;
+    nugX = -1000; //move nugget offscreen
+    console.log(nugX);
+  }
+
+  //beer collision
+  beer(beerX, beerY, beerWidth, beerHeight);
+  if (
+    yellowX >= beerX - beerWidth / 2 &&
+    yellowX <= beerX + beerWidth / 2 &&
+    // yellowY >= beerY - beerHeight / 2 &&
+    yellowY <= beerY + beerHeight / 2
+  ) {
+    //yellowguy hits beer
+    yellowXSpeed = yellowXSpeed - 1000;
+    beerX = -1000; //move beer offscreen
+    console.log(yellowXSpeed);
+  }
+
+  //scoreboard
+  push();
+  fill(255);
+  stroke(0);
+  strokeWeight(5);
+  textSize(30);
+  text("NUGGETS : ", 30, 50);
+  text(score, 210, 50);
+  pop();
 }
+
 function resultScreen(resultYes) {}
 
 function draw() {
