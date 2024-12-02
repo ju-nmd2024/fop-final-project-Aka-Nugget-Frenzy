@@ -8,6 +8,7 @@
 var a = 0;
 var allGrass = [];
 var allNugget = [];
+var allBeer = [];
 var grassX = 300;
 var grassY = 400;
 var state = "game";
@@ -66,6 +67,10 @@ function setup() {
     allNugget[i] = new nugget(500 + a, 470);
     a = a + 50;
   }
+  for (let i = 0; i < 5; i++) {
+    allBeer[i] = new beer(700 + a, 470);
+    a = a + 50;
+  }
 }
 
 function movement() {
@@ -85,6 +90,10 @@ function movement() {
   for (let i = 0; i < allNugget.length; i++) {
     allNugget[i].collide(yellowX, yellowY);
     allNugget[i].display();
+  }
+  for (let i = 0; i < allBeer.length; i++) {
+    allBeer[i].collide(yellowX, yellowY);
+    allBeer[i].display();
   }
   lastYellowY = yellowY;
   if (keyIsDown(65)) {
@@ -132,11 +141,6 @@ function jibsGuy(x, y) {
   pop();
 }
 
-function beer(beerX, beerY, beerWidth, beerHeight) {
-  fill(185, 165, 0);
-  ellipse(beerX, beerY, beerWidth, beerHeight);
-}
-
 function menuScreen() {}
 function gameScreen() {
   // grass(100, 100);
@@ -158,43 +162,6 @@ function gameScreen() {
     stopAtDist
   ) {
     currentlyMoving = false;
-  }
-
-  // if (
-  //   yellowGuy.x >= grass.x &&
-  //   yellowGuy.x <= grass.x + 50 &&
-  //   yellowGuy.y >= grass.y
-  // ) {
-  //   yellowGuy.y = yellowGuy.y;
-  //   jumpReady = true;
-  //   yellowYSpeed = 0;
-  // }
-
-  //nugget collision
-  // allnugget(nugX, nugY, nugWidth, nugHeight);
-  // if (
-  //   yellowX + 50 >= nugX &&
-  //   yellowX <= nugX &&
-  //   yellowY <= nugY &&
-  //   yellowY + 50 >= nugY
-  // ) {
-  //   //yellowguy hits nugget
-  //   score = score + 1;
-  //   nugX = -1000; //move nugget offscreen
-  // }
-
-  //beer collision
-  beer(beerX, beerY, beerWidth, beerHeight);
-  if (
-    yellowX + 50 >= beerX &&
-    yellowX <= beerX &&
-    yellowY + 50 >= beerY &&
-    yellowY <= beerY
-  ) {
-    //yellowguy hits beer
-    yellowXSpeed = yellowXSpeed - 10;
-    beerX = -1000; //move beer offscreen
-    console.log(yellowXSpeed);
   }
 
   //scoreboard
@@ -266,6 +233,31 @@ class nugget {
       theY + 50 >= this.y
     ) {
       score = score + 1;
+      this.x = -1000;
+    }
+  }
+}
+
+class beer {
+  constructor(bX, bY) {
+    this.x = bX;
+    this.y = bY;
+  }
+  display() {
+    push();
+    fill(185, 165, 0);
+    translate(this.x, this.y);
+    ellipse(0, 0, beerWidth, beerHeight);
+    pop();
+  }
+  collide(theX, theY) {
+    if (
+      theX + 50 >= this.x &&
+      theX <= this.x &&
+      theY + 50 >= this.y &&
+      theY <= this.y
+    ) {
+      yellowXSpeed = yellowXSpeed - 10;
       this.x = -1000;
     }
   }
