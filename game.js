@@ -14,9 +14,9 @@ var grassY = 400;
 var state = "game";
 var theFloor = 500;
 var resultYes;
-var copX = 100;
+var copX = 20;
 var copY = 450;
-var yellowX = 200;
+var yellowX = 120;
 var yellowY = theFloor - 50;
 var lastYellowY = yellowY;
 var yellowYSpeed = 0;
@@ -74,10 +74,7 @@ function setup() {
   frameRate(60);
   copStartPos = createVector(copX, copY);
   copPosition = copStartPos.copy();
-  for (let i = 0; i < 10; i++) {
-    allGrass[i] = new grass(300 + a, 400 - a);
-    a = a + 50;
-  }
+
   a = 0;
   for (let i = 0; i < 5; i++) {
     allNugget[i] = new nugget(500 + a, 470);
@@ -158,10 +155,36 @@ function jibsGuy(x, y) {
   pop();
 }
 
+function threeGrass(x, y, id) {
+  push();
+  a = 0;
+  for (let i = 0; i < 3; i++) {
+    allGrass[i] = new grass(x + a, y);
+    a = a + 50;
+  }
+  pop();
+}
+
 function menuScreen() {}
-function dontScreen() {}
+function dontScreen() {
+  background(0, 200, 250);
+  textSize(20);
+  text("Don't steal the nuggets...", 50, 400);
+  push();
+  gameFloor(0, theFloor);
+  pop();
+  oppGuy(copPosition.x, copPosition.y);
+  yellowGuy(yellowX, yellowY);
+  if (keyIsDown(65) || keyIsDown(68)) {
+    state = "game";
+  }
+}
 function gameScreen() {
   a = 0;
+  push();
+  threeGrass(400, 400);
+  pop();
+  //threeGrass(200,400);
   copEndPos = createVector(yellowX, yellowY);
   distToTravel = p5.Vector.sub(copEndPos, copPosition);
   distToMovePerMs = p5.Vector.div(distToTravel, moveDurationMs);
