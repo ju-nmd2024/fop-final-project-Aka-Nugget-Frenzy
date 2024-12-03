@@ -235,6 +235,8 @@ function gameScreen() {
   fill(255, 0, 0);
   text("I WARNED YOU", 50, 400);
   pop();
+
+  //image(doorImage, 0, 0, 16, 22);
   copEndPos = createVector(yellowX, yellowY);
   distToTravel = p5.Vector.sub(copEndPos, copPosition);
   distToMovePerMs = p5.Vector.div(distToTravel, moveDurationMs);
