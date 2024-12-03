@@ -11,7 +11,7 @@ var allNugget = [];
 var allBeer = [];
 var grassX = 300;
 var grassY = 400;
-var state = "dont";
+var state = "game";
 var theFloor = 500;
 var resultYes;
 var copX = 20;
@@ -75,12 +75,19 @@ function setup() {
   copStartPos = createVector(copX, copY);
   copPosition = copStartPos.copy();
   a = 0;
+
   for (let i = 0; i < 5; i++) {
     allBeer[i] = new beer(800 + a, 470);
     a = a + 50;
   }
-  oneNugget(475, 375, 1);
-  oneNugget(175, 275, 2);
+  if (state === "dont") {
+    oneNugget(475, 375, 1);
+    oneNugget(175, 275, 2);
+  }
+  if (state === "game") {
+    oneNugget(475, 375, 1);
+    oneNugget(175, 275, 2);
+  }
 }
 
 function movement() {
@@ -169,21 +176,21 @@ function menuScreen() {
   background(0, 200, 250);
 }
 function dontScreen() {
-  background(0, 200, 250);
+  a = 0;
 
+  background(0, 200, 250);
   textSize(20);
   text("Don't steal the nuggets...", 50, 400);
   push();
   gameFloor(0, theFloor);
   pop();
+
   oppGuy(copPosition.x, copPosition.y);
   yellowGuy(yellowX, yellowY);
+  movement();
   if (keyIsDown(65) || keyIsDown(68)) {
     state = "game";
   }
-  threeGrass(400, 400, 1);
-  threeGrass(100, 300, 2);
-  threeGrass(600, 200, 3);
 }
 function gameScreen() {
   a = 0;
@@ -305,7 +312,7 @@ class beer {
       theY <= this.y
     ) {
       yellowXSpeed = yellowXSpeed - 10;
-      this.x = -1000;
+      return false;
     }
   }
 }
