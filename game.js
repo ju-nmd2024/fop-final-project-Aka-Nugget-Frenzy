@@ -10,6 +10,7 @@ var a = 0;
 var allGrass = [];
 var allNugget = [];
 var allBeer = [];
+var allDoor = [];
 var grassX = 300;
 var grassY = 400;
 var state = "game";
@@ -35,7 +36,6 @@ const moveDurationS = 1; // if you stand still, the cop will catch you in this m
 const moveDurationMs = moveDurationS * 1000;
 var distToMovePerMs;
 var currentlyMoving = true;
-var level = [1, 2, 3, 4, 5];
 
 //nugget
 var nugX = 500;
@@ -167,6 +167,22 @@ function oneBeer(x, y, id) {
     allBeer[i] = new beer(x, y);
   }
 }
+function oneDoor(x, y, id) {
+  for (let i = 1 * id - 1; i < 1 * id; i++) {
+    allDoor[i] = new door(x, y);
+  }
+}
+
+function scoreboard() {
+  push();
+  fill(255);
+  stroke(0);
+  strokeWeight(4);
+  textSize(20);
+  text("NUGGET COUNT:", 30, 50);
+  text(score, 203, 50);
+  pop();
+}
 
 function menuScreen() {
   background(0, 200, 250);
@@ -175,7 +191,6 @@ function dontScreen() {
   a = 0;
   background(0, 200, 250);
   if (state === "dont") {
-    noStroke();
     threeGrass(400, 400, 1);
     threeGrass(150, 300, 2);
     threeGrass(600, 300, 3);
@@ -212,6 +227,7 @@ function gameScreen() {
     oneNugget(225, 275, 3);
     oneNugget(675, 275, 4);
     oneNugget(925, 175, 5);
+    oneDoor(275, 475, 1);
     thing = 2;
   }
   push();
@@ -239,16 +255,13 @@ function gameScreen() {
     currentlyMoving = false;
   }
 
-  //scoreboard
-  push();
-  fill(255);
-  stroke(0);
-  strokeWeight(4);
-  textSize(20);
-  text("NUGGET COUNT:", 30, 50);
-  text(score, 200, 50);
-  pop();
+  scoreboard();
 }
+function level1() {}
+function level2() {}
+function level3() {}
+function level4() {}
+function level5() {}
 
 function resultScreen(resultYes) {}
 
@@ -335,7 +348,30 @@ class beer {
       theY <= this.y
     ) {
       yellowXSpeed = yellowXSpeed - 10;
-      return false;
+      this.x = -1000;
+    }
+  }
+}
+
+class door {
+  constructor(dX, dY) {
+    this.x = dX;
+    this.y = dY;
+  }
+  display() {
+    push();
+    translate(this.x, this.y);
+    image(doorImage, 0, 0, 50, 50);
+    pop();
+  }
+  collide(theX, theY) {
+    if (
+      theX + 50 >= this.x &&
+      theX <= this.x &&
+      theY + 50 >= this.y &&
+      theY <= this.y
+    ) {
+      level += 1;
     }
   }
 }
