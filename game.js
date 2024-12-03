@@ -52,7 +52,23 @@ var score = 0;
 
 function preload() {
   ground_img = loadImage("images/grasspres_0.png");
+  beerImage = loadImage("images/beer.png");
+  nuggetImage = loadImage("images/Chicken_Nugget.png");
+  jibs1 = loadImage("images/jibs1.png");
+  jibs2 = loadImage("images/jibs2.png");
+  policeJetMax = loadImage("images/policejetpackMax.png");
+  policeJetMin = loadImage("images/policejetpackMin.png");
+  policeJetOff = loadImage("images/policejetpackoff.png");
+  yellowCaught1 = loadImage("images/yellowcaught1.png");
+  yellowCaught2 = loadImage("images/yellowcaught2.png");
+  yellowJump = loadImage("images/yellowjump.png");
+  yellowRoll = loadImage("images/yellowroll.png");
+  yellowRun1 = loadImage("images/yellowrun1.png");
+  yellowRun2 = loadImage("images/yellowrun2.png");
+  yellowRun3 = loadImage("images/yellowrun3.png");
+  yellowRun4 = loadImage("images/yellowrun4.png");
 }
+
 function setup() {
   createCanvas(1200, 675);
   frameRate(60);
