@@ -12,7 +12,7 @@ var allNugget = [];
 var allBeer = [];
 var grassX = 300;
 var grassY = 400;
-var state = "dont";
+var state = "game";
 var level = 0;
 var theFloor = 500;
 var resultYes;
@@ -112,7 +112,7 @@ function movement() {
 }
 function keyPressed() {
   if (key == " " && jumpReady == true) {
-    yellowYSpeed -= 30;
+    yellowYSpeed -= 25;
   }
 }
 function gameFloor(x, y) {
@@ -177,14 +177,14 @@ function dontScreen() {
   if (state === "dont") {
     noStroke();
     threeGrass(400, 400, 1);
-    threeGrass(100, 300, 2);
+    threeGrass(150, 300, 2);
     threeGrass(600, 300, 3);
-    threeGrass(900, 200, 4);
-    oneNugget(205, 475, 1);
+    threeGrass(850, 200, 4);
+    oneNugget(275, 475, 1);
     oneNugget(475, 375, 2);
-    oneNugget(175, 275, 3);
+    oneNugget(225, 275, 3);
     oneNugget(675, 275, 4);
-    oneNugget(975, 175, 5);
+    oneNugget(925, 175, 5);
   }
   textSize(20);
   text("Don't steal the nuggets...", 50, 400);
@@ -195,29 +195,36 @@ function dontScreen() {
   oppGuy(copPosition.x, copPosition.y);
   yellowGuy(yellowX, yellowY);
   movement();
-  if (keyIsDown(65) || keyIsDown(68)) {
+  if (keyIsDown(65) || keyIsDown(68) || keyIsDown(32)) {
     state = "game";
   }
 }
 function gameScreen() {
   a = 0;
+  background(0, 200, 250);
   if (thing === 1) {
     threeGrass(400, 400, 1);
-    threeGrass(100, 300, 2);
+    threeGrass(150, 300, 2);
     threeGrass(600, 300, 3);
-    threeGrass(900, 200, 4);
-    oneNugget(205, 475, 1);
+    threeGrass(850, 200, 4);
+    oneNugget(275, 475, 1);
     oneNugget(475, 375, 2);
-    oneNugget(175, 275, 3);
+    oneNugget(225, 275, 3);
     oneNugget(675, 275, 4);
-    oneNugget(975, 175, 5);
+    oneNugget(925, 175, 5);
     thing = 2;
   }
+  push();
+  textSize(30);
+  fill(255, 0, 0);
+  text("I WARNED YOU", 50, 400);
+  pop();
   copEndPos = createVector(yellowX, yellowY);
   distToTravel = p5.Vector.sub(copEndPos, copPosition);
   distToMovePerMs = p5.Vector.div(distToTravel, moveDurationMs);
-  background(0, 200, 250);
+  push();
   gameFloor(0, theFloor);
+  pop();
   yellowGuy(yellowX, yellowY);
   oppGuy(copPosition.x, copPosition.y);
   movement();
@@ -236,10 +243,10 @@ function gameScreen() {
   push();
   fill(255);
   stroke(0);
-  strokeWeight(5);
+  strokeWeight(4);
   textSize(20);
-  text("NUGGETS:", 30, 50);
-  text(score, 140, 50);
+  text("NUGGET COUNT:", 30, 50);
+  text(score, 200, 50);
   pop();
 }
 
