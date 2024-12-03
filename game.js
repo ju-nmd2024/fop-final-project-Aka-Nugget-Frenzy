@@ -156,13 +156,12 @@ function jibsGuy(x, y) {
 }
 
 function threeGrass(x, y, id) {
-  push();
   a = 0;
-  for (let i = 0; i < 3; i++) {
+
+  for (let i = 3 * id - 3; i < 3 * id; i++) {
     allGrass[i] = new grass(x + a, y);
     a = a + 50;
   }
-  pop();
 }
 
 function menuScreen() {}
@@ -181,9 +180,9 @@ function dontScreen() {
 }
 function gameScreen() {
   a = 0;
-  push();
-  threeGrass(400, 400);
-  pop();
+
+  threeGrass(200, 400, 1);
+  threeGrass(300, 300, 2);
   //threeGrass(200,400);
   copEndPos = createVector(yellowX, yellowY);
   distToTravel = p5.Vector.sub(copEndPos, copPosition);
