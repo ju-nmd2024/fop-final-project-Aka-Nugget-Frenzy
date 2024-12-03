@@ -5,13 +5,15 @@
 //jibsGuy
 //nugget
 //beer
+let thing = 1;
 var a = 0;
 var allGrass = [];
 var allNugget = [];
 var allBeer = [];
 var grassX = 300;
 var grassY = 400;
-var state = "game";
+var state = "dont";
+var level = 0;
 var theFloor = 500;
 var resultYes;
 var copX = 20;
@@ -75,19 +77,6 @@ function setup() {
   copStartPos = createVector(copX, copY);
   copPosition = copStartPos.copy();
   a = 0;
-
-  for (let i = 0; i < 5; i++) {
-    allBeer[i] = new beer(800 + a, 470);
-    a = a + 50;
-  }
-  if (state === "dont") {
-    oneNugget(475, 375, 1);
-    oneNugget(175, 275, 2);
-  }
-  if (state === "game") {
-    oneNugget(475, 375, 1);
-    oneNugget(175, 275, 2);
-  }
 }
 
 function movement() {
@@ -172,13 +161,29 @@ function oneNugget(x, y, id) {
   }
 }
 
+function oneBeer(x, y, id) {
+  for (let i = 1 * id - 1; i < 1 * id; i++) {
+    allBeer[i] = new beer(x, y);
+  }
+}
+
 function menuScreen() {
   background(0, 200, 250);
 }
 function dontScreen() {
   a = 0;
-
   background(0, 200, 250);
+  if (state === "dont") {
+    threeGrass(400, 400, 1);
+    threeGrass(100, 300, 2);
+    threeGrass(600, 300, 3);
+    threeGrass(900, 200, 4);
+    oneNugget(205, 475, 1);
+    oneNugget(475, 375, 2);
+    oneNugget(175, 275, 3);
+    oneNugget(675, 275, 4);
+    oneNugget(975, 175, 5);
+  }
   textSize(20);
   text("Don't steal the nuggets...", 50, 400);
   push();
@@ -194,9 +199,18 @@ function dontScreen() {
 }
 function gameScreen() {
   a = 0;
-  // threeGrass(400, 400, 1);
-  // threeGrass(100, 300, 2);
-  // threeGrass(600, 200, 3);
+  if (thing === 1) {
+    threeGrass(400, 400, 1);
+    threeGrass(100, 300, 2);
+    threeGrass(600, 300, 3);
+    threeGrass(900, 200, 4);
+    oneNugget(205, 475, 1);
+    oneNugget(475, 375, 2);
+    oneNugget(175, 275, 3);
+    oneNugget(675, 275, 4);
+    oneNugget(975, 175, 5);
+    thing = 2;
+  }
   copEndPos = createVector(yellowX, yellowY);
   distToTravel = p5.Vector.sub(copEndPos, copPosition);
   distToMovePerMs = p5.Vector.div(distToTravel, moveDurationMs);
