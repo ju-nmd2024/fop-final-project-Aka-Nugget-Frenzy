@@ -69,6 +69,7 @@ function preload() {
   yellowRun2 = loadImage("images/yellowrun2.png");
   yellowRun3 = loadImage("images/yellowrun3.png");
   yellowRun4 = loadImage("images/yellowrun4.png");
+  doorImage = loadImage("images/exitdoor.png");
 }
 
 function setup() {
@@ -174,6 +175,7 @@ function dontScreen() {
   a = 0;
   background(0, 200, 250);
   if (state === "dont") {
+    noStroke();
     threeGrass(400, 400, 1);
     threeGrass(100, 300, 2);
     threeGrass(600, 300, 3);
