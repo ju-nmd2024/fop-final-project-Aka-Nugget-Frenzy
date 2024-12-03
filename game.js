@@ -159,6 +159,7 @@ function jibsGuy(x, y) {
 }
 
 function menuScreen() {}
+function dontScreen() {}
 function gameScreen() {
   // grass(100, 100);
   a = 0;
@@ -197,6 +198,8 @@ function resultScreen(resultYes) {}
 function draw() {
   if (state === "menu") {
     menuScreen();
+  } else if (state === "dont") {
+    dontScreen();
   } else if (state === "game") {
     gameScreen();
   } else if (state === "result") {
