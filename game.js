@@ -161,7 +161,6 @@ function jibsGuy(x, y) {
 function menuScreen() {}
 function dontScreen() {}
 function gameScreen() {
-  // grass(100, 100);
   a = 0;
   copEndPos = createVector(yellowX, yellowY);
   distToTravel = p5.Vector.sub(copEndPos, copPosition);
