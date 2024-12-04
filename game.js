@@ -1,5 +1,5 @@
-let thing = 1;
-var level = 1;
+let thing = 2;
+var level = 2;
 
 var a = 0;
 var state = "game";
@@ -219,11 +219,18 @@ function gameScreen() {
   a = 0;
   background(0, 200, 250);
   if (level === 1) {
+    push();
+    textSize(30);
+    fill(255, 0, 0);
+    text("I WARNED YOU", 50, 400);
+    pop();
+
     if (thing === 1) {
       threeGrass(400, 400, 1);
       threeGrass(150, 300, 2);
       threeGrass(600, 300, 3);
       threeGrass(850, 200, 4);
+
       oneNugget(275, 475, 1);
       oneNugget(475, 375, 2);
       oneNugget(225, 275, 3);
@@ -246,20 +253,22 @@ function gameScreen() {
       yellowY = theFloor - 50;
       copPosition.x = 20;
       copPosition.y = 450;
-      threeGrass(400, 400, 1);
-      threeGrass(150, 300, 2);
-      threeGrass(600, 300, 3);
-      threeGrass(850, 200, 4);
-      oneNugget(275, 475, 1);
-      oneNugget(475, 375, 2);
-      oneNugget(225, 275, 3);
-      oneNugget(675, 275, 4);
-      oneNugget(925, 175, 5);
+      threeGrass(600, 400, 1);
+      threeGrass(350, 100, 2);
+      threeGrass(850, 300, 3);
+      threeGrass(600, 200, 4);
+
+      oneNugget(475, 475, 1);
+      oneNugget(675, 375, 2);
+      oneNugget(425, 75, 3);
+      oneNugget(925, 275, 4);
+      oneNugget(675, 175, 5);
 
       thing = 3;
     }
     if (score === 10) {
-      oneDoor(275, 432, 1);
+      threeGrass(100, 300, 5);
+      oneDoor(150, 232, 1);
     }
   }
   if (level === 3) {
@@ -313,12 +322,6 @@ function gameScreen() {
       oneDoor(275, 432, 1);
     }
   }
-
-  push();
-  textSize(30);
-  fill(255, 0, 0);
-  text("I WARNED YOU", 50, 400);
-  pop();
 
   copEndPos = createVector(yellowX, yellowY);
   distToTravel = p5.Vector.sub(copEndPos, copPosition);
