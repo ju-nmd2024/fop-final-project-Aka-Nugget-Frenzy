@@ -1,5 +1,5 @@
-let thing = 2;
-var level = 2;
+let thing = 4;
+var level = 4;
 
 var a = 0;
 var state = "game";
@@ -240,7 +240,7 @@ function gameScreen() {
       thing = 2;
     }
     if (score === 5) {
-      oneDoor(275, 432, 1);
+      oneDoor(1075, 432, 1);
     }
   }
   if (level === 2) {
@@ -253,6 +253,7 @@ function gameScreen() {
       yellowY = theFloor - 50;
       copPosition.x = 20;
       copPosition.y = 450;
+
       threeGrass(600, 400, 1);
       threeGrass(350, 100, 2);
       threeGrass(850, 300, 3);
@@ -281,11 +282,24 @@ function gameScreen() {
       yellowY = theFloor - 50;
       copPosition.x = 20;
       copPosition.y = 450;
-      threeGrass(400, 400, 1);
+
+      threeGrass(300, 400, 1);
+      threeGrass(150, 250, 2);
+      threeGrass(650, 300, 3);
+      threeGrass(400, 100, 4);
+      threeGrass(900, 200, 5);
+
+      oneNugget(375, 375, 1);
+      oneNugget(225, 225, 2);
+      oneNugget(475, 75, 3);
+      oneNugget(725, 275, 4);
+      oneNugget(975, 175, 5);
+
       thing = 4;
     }
     if (score === 15) {
-      oneDoor(275, 432, 1);
+      threeGrass(1050, 50, 6);
+      oneDoor(1100, -18, 1);
     }
   }
   if (level === 4) {
