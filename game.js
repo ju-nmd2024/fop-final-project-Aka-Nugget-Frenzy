@@ -102,6 +102,10 @@ function movement() {
     allBeer[i].collide(yellowX, yellowY);
     allBeer[i].display();
   }
+  for (let i = 0; i < allDoor.length; i++) {
+    allDoor[i].collide(yellowX, yellowY);
+    allDoor[i].display();
+  }
   lastYellowY = yellowY;
   if (keyIsDown(65)) {
     yellowX -= 5;
@@ -236,7 +240,6 @@ function gameScreen() {
   text("I WARNED YOU", 50, 400);
   pop();
 
-  //image(doorImage, 0, 0, 16, 22);
   copEndPos = createVector(yellowX, yellowY);
   distToTravel = p5.Vector.sub(copEndPos, copPosition);
   distToMovePerMs = p5.Vector.div(distToTravel, moveDurationMs);
@@ -362,8 +365,8 @@ class door {
   }
   display() {
     push();
-    translate(this.x, this.y);
-    image(doorImage, 0, 0, 50, 50);
+    //translate(this.x, this.y);
+    image(doorImage, 0, 0, 50, 68);
     pop();
   }
   collide(theX, theY) {
