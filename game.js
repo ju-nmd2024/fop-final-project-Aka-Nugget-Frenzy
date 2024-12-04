@@ -348,10 +348,10 @@ function gameScreen() {
       threeGrass(300, 100, 4);
 
       oneNugget(475, 475, 1);
-      oneNugget(225, 75, 2);
-      oneNugget(475, 75, 3);
-      oneNugget(725, 225, 4);
-      oneNugget(875, 125, 5);
+      oneNugget(275, 325, 2);
+      oneNugget(125, 175, 3);
+      oneNugget(375, 75, 4);
+      oneNugget(625, 275, 5);
 
       thing = 6;
     }
