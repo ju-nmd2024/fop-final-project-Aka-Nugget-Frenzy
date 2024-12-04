@@ -2,7 +2,7 @@ let thing = 5;
 var level = 5;
 
 var a = 0;
-var state = "game";
+var state = "dont";
 var resultYes;
 
 var allGrass = [];
@@ -359,6 +359,9 @@ function gameScreen() {
       threeGrass(550, 100, 5);
       oneDoor(600, 32, 1);
     }
+    if (level === 6) {
+      state = "result";
+    }
   }
 
   copEndPos = createVector(yellowX, yellowY);
@@ -384,7 +387,14 @@ function gameScreen() {
   scoreboard();
 }
 
-function resultScreen(resultYes) {}
+function resultScreen() {
+  background(0, 200, 250);
+  push();
+  textSize(30);
+  fill(0, 255, 0);
+  text("YOU WON", 50, 400);
+  pop();
+}
 
 function draw() {
   if (state === "menu") {
@@ -394,7 +404,7 @@ function draw() {
   } else if (state === "game") {
     gameScreen();
   } else if (state === "result") {
-    resultScreen(resultYes);
+    resultScreen();
   }
 }
 
