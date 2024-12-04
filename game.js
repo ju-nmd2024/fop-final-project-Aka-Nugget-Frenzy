@@ -1,5 +1,5 @@
-let thing = 5;
-var level = 5;
+let thing = 1;
+var level = 1;
 
 var a = 0;
 var state = "dont";
@@ -20,7 +20,8 @@ var yellowY = theFloor - 50;
 var lastYellowY = yellowY;
 
 var yellowYSpeed = 0;
-var yellowXSpeed = 0;
+var yellowYJumpMax = 25;
+var yellowXSpeed = 5;
 var jumpReady = true;
 
 var copStartPos;
@@ -105,15 +106,15 @@ function movement() {
   }
   lastYellowY = yellowY;
   if (keyIsDown(65)) {
-    yellowX -= 5;
+    yellowX -= yellowXSpeed;
   }
   if (keyIsDown(68)) {
-    yellowX += 5;
+    yellowX += yellowXSpeed;
   }
 }
 function keyPressed() {
   if (key == " " && jumpReady == true) {
-    yellowYSpeed -= 25;
+    yellowYSpeed -= yellowYJumpMax;
   }
 }
 function gameFloor(x, y) {
@@ -192,6 +193,7 @@ function dontScreen() {
   a = 0;
   background(0, 200, 250);
   if (state === "dont") {
+    oneBeer(375, 475, 1);
     threeGrass(400, 400, 1);
     threeGrass(150, 300, 2);
     threeGrass(600, 300, 3);
@@ -226,6 +228,7 @@ function gameScreen() {
     pop();
 
     if (thing === 1) {
+      oneBeer(375, 475, 1);
       threeGrass(400, 400, 1);
       threeGrass(150, 300, 2);
       threeGrass(600, 300, 3);
@@ -477,7 +480,8 @@ class beer {
       theY + 50 >= this.y &&
       theY <= this.y
     ) {
-      yellowXSpeed = yellowXSpeed - 10;
+      yellowXSpeed = 2;
+      yellowYJumpMax = 15;
       this.x = -1000;
     }
   }
