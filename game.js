@@ -20,11 +20,11 @@ var theFloor = 500;
 var copX = 20;
 var copY = 450;
 var yellowX = 120;
-var yellowY = theFloor - 50;
+var yellowY = theFloor - 97;
 var lastYellowY = yellowY;
 var yellowNowPic = null;
 var yellowNowState = 0;
-var direction;
+var direction = "right";
 var yellowWidth = 30;
 var yellowHeight = 60;
 
@@ -64,6 +64,7 @@ function preload() {
     picsLeft[i] = loadImage(`images/yellowRunL${i}.png`);
     picsRight[i] = loadImage(`images/yellowRun${i}R.png`);
   }
+
   yellowJumpL = loadImage("images/yellowjumpL.png");
   yellowJumpR = loadImage("images/yellowjumpR.png");
   ground_img = loadImage("images/grasspres_0.png");
@@ -76,7 +77,6 @@ function preload() {
   // policeJetOffR = loadImage("images/policejetpackoff.png");
   // yellowCaught1 = loadImage("images/yellowcaught1.png");
   // yellowCaught2 = loadImage("images/yellowcaught2.png");
-  // yellowJumpR = loadImage("images/yellowjump.png");
   doorImage = loadImage("images/exitdoor.png");
 }
 
@@ -86,15 +86,15 @@ function setup() {
   copStartPos = createVector(copX, copY);
   copPosition = copStartPos.copy();
   a = 0;
-  yellowNowPic = picsRight[0];
+  yellowNowPic = picsRight[yellowNowState];
 }
 
 function movement() {
   yellowY = yellowY + yellowYSpeed;
-  if (yellowY >= theFloor - 50) {
+  if (yellowY >= theFloor - 97) {
     jumpReady = true;
     yellowYSpeed = 0;
-    yellowY = theFloor - 50;
+    yellowY = theFloor - 97;
   } else {
     jumpReady = false;
     yellowYSpeed += 2;
@@ -122,31 +122,30 @@ function movement() {
   if (keyIsDown(65)) {
     yellowX -= yellowXSpeed;
     moving = true;
+    yellowNowPic = picsLeft[yellowNowState];
     direction = "left";
-  }
-  if (keyIsDown(68)) {
+  } else if (keyIsDown(68)) {
     //right
     yellowX += yellowXSpeed;
     moving = true;
+    yellowNowPic = picsRight[yellowNowState];
     direction = "right";
   }
 
-  if (moving == true) {
-    if (frameCount % 12 === 0) {
-      yellowNowState = yellowNowState % 4;
-    }
-  } else {
-    yellowNowState = 0;
-  }
-
-  if (direction === "left") {
-    yellowNowPic = picsLeft[yellowNowState];
-  } else if (direction === "right") {
-    yellowNowPic = picsRight[yellowNowState];
-  } else if (direction === "right" && jumpReady == false) {
+  if (direction === "right" && jumpReady == false) {
     yellowNowPic = yellowJumpR;
   } else if (direction === "left" && jumpReady == false) {
     yellowNowPic = yellowJumpL;
+  }
+  if (jumpReady === true) {
+    if (moving == true) {
+      if (frameCount % 6 === 0) {
+        yellowNowState += 1;
+        yellowNowState = yellowNowState % 4;
+      }
+    } else if (moving == false) {
+      yellowNowState = 0;
+    }
   }
 }
 function keyPressed() {
@@ -415,7 +414,7 @@ function gameScreen() {
   push();
   gameFloor(0, theFloor);
   pop();
-  yellowGuy(yellowX, yellowY);
+  yellowGuy(yellowX, yellowY, yellowNowPic);
   oppGuy(copPosition.x, copPosition.y);
   movement();
   if (currentlyMoving) {
