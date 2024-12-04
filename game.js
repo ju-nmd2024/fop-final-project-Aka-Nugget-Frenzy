@@ -359,11 +359,10 @@ function gameScreen() {
       threeGrass(550, 100, 5);
       oneDoor(600, 32, 1);
     }
-    if (level === 6) {
-      state = "result";
-    }
   }
-
+  if (level === 6) {
+    state = "result";
+  }
   copEndPos = createVector(yellowX, yellowY);
   distToTravel = p5.Vector.sub(copEndPos, copPosition);
   distToMovePerMs = p5.Vector.div(distToTravel, moveDurationMs);
