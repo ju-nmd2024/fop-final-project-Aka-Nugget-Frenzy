@@ -1,5 +1,5 @@
-let thing = 4;
-var level = 4;
+let thing = 5;
+var level = 5;
 
 var a = 0;
 var state = "game";
@@ -312,11 +312,23 @@ function gameScreen() {
       yellowY = theFloor - 50;
       copPosition.x = 20;
       copPosition.y = 450;
-      threeGrass(400, 400, 1);
+
+      threeGrass(400, 350, 1);
+      threeGrass(150, 100, 2);
+      threeGrass(650, 250, 3);
+      threeGrass(400, 100, 4);
+      threeGrass(800, 150, 5);
+
+      oneNugget(475, 325, 1);
+      oneNugget(225, 75, 2);
+      oneNugget(475, 75, 3);
+      oneNugget(725, 225, 4);
+      oneNugget(875, 125, 5);
+
       thing = 5;
     }
     if (score === 20) {
-      oneDoor(275, 432, 1);
+      oneDoor(1075, 432, 1);
     }
   }
   if (level === 5) {
@@ -329,11 +341,23 @@ function gameScreen() {
       yellowY = theFloor - 50;
       copPosition.x = 20;
       copPosition.y = 450;
-      threeGrass(400, 400, 1);
+
+      threeGrass(200, 350, 1);
+      threeGrass(50, 200, 2);
+      threeGrass(550, 300, 3);
+      threeGrass(300, 100, 4);
+
+      oneNugget(475, 475, 1);
+      oneNugget(225, 75, 2);
+      oneNugget(475, 75, 3);
+      oneNugget(725, 225, 4);
+      oneNugget(875, 125, 5);
+
       thing = 6;
     }
     if (score === 25) {
-      oneDoor(275, 432, 1);
+      threeGrass(550, 100, 5);
+      oneDoor(600, 32, 1);
     }
   }
 
@@ -359,11 +383,6 @@ function gameScreen() {
 
   scoreboard();
 }
-function level1() {}
-function level2() {}
-function level3() {}
-function level4() {}
-function level5() {}
 
 function resultScreen(resultYes) {}
 
