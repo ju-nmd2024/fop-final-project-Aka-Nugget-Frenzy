@@ -4,11 +4,14 @@ var level = 1;
 var a = 0;
 var state = "dont";
 var resultYes;
-
 var allGrass = [];
 var allNugget = [];
 var allBeer = [];
 var allDoor = [];
+var picsLeft = [];
+var picsRight = [];
+var picsJumpRight = [];
+var picsJumpLeft = [];
 
 var grassX = 300;
 var grassY = 400;
@@ -51,17 +54,20 @@ var beerHeight = 30;
 var score = 0;
 
 function preload() {
+  for (let i = 0; i < 4; i++) {
+    picsLeft[i] = loadImage();
+  }
   ground_img = loadImage("images/grasspres_0.png");
-  beerImage = loadImage("images/beer.png");
-  nuggetImage = loadImage("images/Chicken_Nugget.png");
-  jibs1 = loadImage("images/jibs1.png");
-  jibs2 = loadImage("images/jibs2.png");
-  policeJetMaxR = loadImage("images/policejetpackMax.png");
-  policeJetMinR = loadImage("images/policejetpackMin.png");
-  policeJetOffR = loadImage("images/policejetpackoff.png");
-  yellowCaught1 = loadImage("images/yellowcaught1.png");
-  yellowCaught2 = loadImage("images/yellowcaught2.png");
-  yellowJumpR = loadImage("images/yellowjump.png");
+  // beerImage = loadImage("images/beer.png");
+  // nuggetImage = loadImage("images/Chicken_Nugget.png");
+  // jibs1 = loadImage("images/jibs1.png");
+  // jibs2 = loadImage("images/jibs2.png");
+  // policeJetMaxR = loadImage("images/policejetpackMax.png");
+  // policeJetMinR = loadImage("images/policejetpackMin.png");
+  // policeJetOffR = loadImage("images/policejetpackoff.png");
+  // yellowCaught1 = loadImage("images/yellowcaught1.png");
+  // yellowCaught2 = loadImage("images/yellowcaught2.png");
+  // yellowJumpR = loadImage("images/yellowjump.png");
   doorImage = loadImage("images/exitdoor.png");
 }
 
