@@ -1,27 +1,24 @@
-//NuggetGame Characters
-//backGround
-//yellowGuy
-//oppGuy
-//jibsGuy
-//nugget
-//beer
 let thing = 1;
+var level = 1;
+
 var a = 0;
+var state = "game";
+var resultYes;
+
 var allGrass = [];
 var allNugget = [];
 var allBeer = [];
 var allDoor = [];
+
 var grassX = 300;
 var grassY = 400;
-var state = "game";
-var level = 1;
 var theFloor = 500;
-var resultYes;
 var copX = 20;
 var copY = 450;
 var yellowX = 120;
 var yellowY = theFloor - 50;
 var lastYellowY = yellowY;
+
 var yellowYSpeed = 0;
 var yellowXSpeed = 0;
 var jumpReady = true;
@@ -232,10 +229,11 @@ function gameScreen() {
       oneNugget(225, 275, 3);
       oneNugget(675, 275, 4);
       oneNugget(925, 175, 5);
-      oneDoor(275, 432, 1);
+
       thing = 2;
     }
     if (score === 5) {
+      oneDoor(275, 432, 1);
     }
   }
   if (level === 2) {
@@ -246,12 +244,73 @@ function gameScreen() {
       allDoor = [];
       yellowX = 120;
       yellowY = theFloor - 50;
-      copX = 20;
-      copY = 450;
+      copPosition.x = 20;
+      copPosition.y = 450;
       threeGrass(400, 400, 1);
+      threeGrass(150, 300, 2);
+      threeGrass(600, 300, 3);
+      threeGrass(850, 200, 4);
+      oneNugget(275, 475, 1);
+      oneNugget(475, 375, 2);
+      oneNugget(225, 275, 3);
+      oneNugget(675, 275, 4);
+      oneNugget(925, 175, 5);
+
       thing = 3;
     }
     if (score === 10) {
+      oneDoor(275, 432, 1);
+    }
+  }
+  if (level === 3) {
+    if (thing === 3) {
+      allGrass = [];
+      allNugget = [];
+      allBeer = [];
+      allDoor = [];
+      yellowX = 120;
+      yellowY = theFloor - 50;
+      copPosition.x = 20;
+      copPosition.y = 450;
+      threeGrass(400, 400, 1);
+      thing = 4;
+    }
+    if (score === 15) {
+      oneDoor(275, 432, 1);
+    }
+  }
+  if (level === 4) {
+    if (thing === 4) {
+      allGrass = [];
+      allNugget = [];
+      allBeer = [];
+      allDoor = [];
+      yellowX = 120;
+      yellowY = theFloor - 50;
+      copPosition.x = 20;
+      copPosition.y = 450;
+      threeGrass(400, 400, 1);
+      thing = 5;
+    }
+    if (score === 20) {
+      oneDoor(275, 432, 1);
+    }
+  }
+  if (level === 5) {
+    if (thing === 5) {
+      allGrass = [];
+      allNugget = [];
+      allBeer = [];
+      allDoor = [];
+      yellowX = 120;
+      yellowY = theFloor - 50;
+      copPosition.x = 20;
+      copPosition.y = 450;
+      threeGrass(400, 400, 1);
+      thing = 6;
+    }
+    if (score === 25) {
+      oneDoor(275, 432, 1);
     }
   }
 
