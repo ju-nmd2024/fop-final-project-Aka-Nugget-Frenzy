@@ -56,17 +56,16 @@ function preload() {
   nuggetImage = loadImage("images/Chicken_Nugget.png");
   jibs1 = loadImage("images/jibs1.png");
   jibs2 = loadImage("images/jibs2.png");
-  policeJetMax = loadImage("images/policejetpackMax.png");
-  policeJetMin = loadImage("images/policejetpackMin.png");
-  policeJetOff = loadImage("images/policejetpackoff.png");
+  policeJetMaxR = loadImage("images/policejetpackMax.png");
+  policeJetMinR = loadImage("images/policejetpackMin.png");
+  policeJetOffR = loadImage("images/policejetpackoff.png");
   yellowCaught1 = loadImage("images/yellowcaught1.png");
   yellowCaught2 = loadImage("images/yellowcaught2.png");
-  yellowJump = loadImage("images/yellowjump.png");
-  yellowRoll = loadImage("images/yellowroll.png");
-  yellowRun1 = loadImage("images/yellowrun1.png");
-  yellowRun2 = loadImage("images/yellowrun2.png");
-  yellowRun3 = loadImage("images/yellowrun3.png");
-  yellowRun4 = loadImage("images/yellowrun4.png");
+  yellowJumpR = loadImage("images/yellowjump.png");
+  yellowRun1R = loadImage("images/yellowrun1.png");
+  yellowRun2R = loadImage("images/yellowrun2.png");
+  yellowRun3R = loadImage("images/yellowrun3.png");
+  yellowRun4R = loadImage("images/yellowrun4.png");
   doorImage = loadImage("images/exitdoor.png");
 }
 
