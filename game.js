@@ -1,5 +1,6 @@
 var thing = 1;
 var level = 1;
+var moving = false;
 
 var a = 0;
 var state = "dont";
@@ -63,8 +64,8 @@ function preload() {
     picsLeft[i] = loadImage(`images/yellowRunL${i}.png`);
     picsRight[i] = loadImage(`images/yellowRun${i}R.png`);
   }
-  yellowjumpL = loadImage("images/yellowjumpL.png");
-  yellowjumpR = loadImage("images/yellowjumpR.png");
+  yellowJumpL = loadImage("images/yellowjumpL.png");
+  yellowJumpR = loadImage("images/yellowjumpR.png");
   ground_img = loadImage("images/grasspres_0.png");
   // beerImage = loadImage("images/beer.png");
   // nuggetImage = loadImage("images/Chicken_Nugget.png");
@@ -116,31 +117,42 @@ function movement() {
   lastYellowY = yellowY;
 
   //Left Movement
-  var movement = false;
+  moving = false;
   if (keyIsDown(65)) {
     yellowX -= yellowXSpeed;
-    movement = true;
+    moving = true;
   }
   if (keyIsDown(68)) {
     //right
     yellowX += yellowXSpeed;
-    movement = true;
+    moving = true;
   }
 }
 function keyPressed() {
-  var movement = false;
+  moving = false;
   if (key == " " && jumpReady == true) {
     yellowYSpeed -= yellowYJumpMax;
-    movement = true;
+    moving = true;
   }
 }
 
-if (movement) {
+//framecount
+if (moving) {
   if (frameCount % 12 === 0) {
     yellowNowState = yellowNowState % 4;
   }
 } else {
-  player.yellowNowState = 0;
+  yellowNowState = 0;
+}
+
+if (direction === "left") {
+  yellowNowPic = picsLeft[yellowNowState];
+} else if (direction === "right") {
+  yellowNowPic = picsRight[yellowNowState];
+} else if (direction === "jumpright") {
+  yellowNowPic = yellowJumpR;
+} else if (direction === "jumpleft") {
+  yellowNowPic = yellowJumpL;
 }
 
 function gameFloor(x, y) {
@@ -149,7 +161,7 @@ function gameFloor(x, y) {
   rect(x, y, 1200, 675);
 }
 
-function yellowGuy(x, y) {
+function yellowGuy(x, y, yellowWidth, yellowHeight) {
   push();
   stroke(0);
   strokeWeight(2);
