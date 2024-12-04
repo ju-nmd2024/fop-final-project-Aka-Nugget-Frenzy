@@ -24,7 +24,7 @@ var yellowY = theFloor - 50;
 var lastYellowY = yellowY;
 var yellowNowPic = null;
 var yellowNowState = 0;
-var direction = "left";
+var direction;
 var yellowWidth = 30;
 var yellowHeight = 60;
 
@@ -86,6 +86,7 @@ function setup() {
   copStartPos = createVector(copX, copY);
   copPosition = copStartPos.copy();
   a = 0;
+  yellowNowPic = picsRight[0];
 }
 
 function movement() {
@@ -121,11 +122,31 @@ function movement() {
   if (keyIsDown(65)) {
     yellowX -= yellowXSpeed;
     moving = true;
+    direction = "left";
   }
   if (keyIsDown(68)) {
     //right
     yellowX += yellowXSpeed;
     moving = true;
+    direction = "right";
+  }
+
+  if (moving == true) {
+    if (frameCount % 12 === 0) {
+      yellowNowState = yellowNowState % 4;
+    }
+  } else {
+    yellowNowState = 0;
+  }
+
+  if (direction === "left") {
+    yellowNowPic = picsLeft[yellowNowState];
+  } else if (direction === "right") {
+    yellowNowPic = picsRight[yellowNowState];
+  } else if (direction === "right" && jumpReady == false) {
+    yellowNowPic = yellowJumpR;
+  } else if (direction === "left" && jumpReady == false) {
+    yellowNowPic = yellowJumpL;
   }
 }
 function keyPressed() {
@@ -136,23 +157,6 @@ function keyPressed() {
 }
 
 //framecount
-if (moving) {
-  if (frameCount % 12 === 0) {
-    yellowNowState = yellowNowState % 4;
-  }
-} else {
-  yellowNowState = 0;
-}
-
-if (direction === "left") {
-  yellowNowPic = picsLeft[yellowNowState];
-} else if (direction === "right") {
-  yellowNowPic = picsRight[yellowNowState];
-} else if (direction === "right" && jumpReady == false) {
-  yellowNowPic = yellowJumpR;
-} else if (direction === "left" && jumpReady == false) {
-  yellowNowPic = yellowJumpL;
-}
 
 function gameFloor(x, y) {
   noStroke();
@@ -160,12 +164,14 @@ function gameFloor(x, y) {
   rect(x, y, 1200, 675);
 }
 
-function yellowGuy(x, y, yellowWidth, yellowHeight) {
+function yellowGuy(x, y, pic) {
   push();
   stroke(0);
   strokeWeight(2);
   fill(255, 255, 0);
-  square(x, y, 50);
+  translate(x, y);
+  image(pic, 0, 0, 50, 97);
+  //square(x, y, 50);
   pop();
 }
 
@@ -248,7 +254,7 @@ function dontScreen() {
   pop();
 
   oppGuy(copPosition.x, copPosition.y);
-  yellowGuy(yellowX, yellowY);
+  yellowGuy(yellowX, yellowY, yellowNowPic);
   movement();
   if (keyIsDown(65) || keyIsDown(68) || keyIsDown(32)) {
     state = "game";
