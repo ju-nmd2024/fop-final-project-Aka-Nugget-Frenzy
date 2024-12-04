@@ -62,10 +62,6 @@ function preload() {
   yellowCaught1 = loadImage("images/yellowcaught1.png");
   yellowCaught2 = loadImage("images/yellowcaught2.png");
   yellowJumpR = loadImage("images/yellowjump.png");
-  yellowRun1R = loadImage("images/yellowrun1.png");
-  yellowRun2R = loadImage("images/yellowrun2.png");
-  yellowRun3R = loadImage("images/yellowrun3.png");
-  yellowRun4R = loadImage("images/yellowrun4.png");
   doorImage = loadImage("images/exitdoor.png");
 }
 
