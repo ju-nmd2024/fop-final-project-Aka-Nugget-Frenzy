@@ -1,4 +1,4 @@
-let thing = 1;
+var thing = 1;
 var level = 1;
 
 var a = 0;
@@ -21,6 +21,11 @@ var copY = 450;
 var yellowX = 120;
 var yellowY = theFloor - 50;
 var lastYellowY = yellowY;
+var yellowNowPic = null;
+var yellowNowState = 0;
+var direction = "left";
+var yellowWidth = 30;
+var yellowHeight = 60;
 
 var yellowYSpeed = 0;
 var yellowYJumpMax = 25;
@@ -55,8 +60,11 @@ var score = 0;
 
 function preload() {
   for (let i = 0; i < 4; i++) {
-    picsLeft[i] = loadImage();
+    picsLeft[i] = loadImage(`images/yellowRunL${i}.png`);
+    picsRight[i] = loadImage(`images/yellowRun${i}R.png`);
   }
+  yellowjumpL = loadImage("images/yellowjumpL.png");
+  yellowjumpR = loadImage("images/yellowjumpR.png");
   ground_img = loadImage("images/grasspres_0.png");
   // beerImage = loadImage("images/beer.png");
   // nuggetImage = loadImage("images/Chicken_Nugget.png");
