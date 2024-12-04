@@ -114,18 +114,35 @@ function movement() {
     allDoor[i].display();
   }
   lastYellowY = yellowY;
+
+  //Left Movement
+  var movement = false;
   if (keyIsDown(65)) {
     yellowX -= yellowXSpeed;
+    movement = true;
   }
   if (keyIsDown(68)) {
+    //right
     yellowX += yellowXSpeed;
+    movement = true;
   }
 }
 function keyPressed() {
+  var movement = false;
   if (key == " " && jumpReady == true) {
     yellowYSpeed -= yellowYJumpMax;
+    movement = true;
   }
 }
+
+if (movement) {
+  if (frameCount % 12 === 0) {
+    yellowNowState = yellowNowState % 4;
+  }
+} else {
+  player.yellowNowState = 0;
+}
+
 function gameFloor(x, y) {
   noStroke();
   fill(0, 255, 0);
