@@ -14,7 +14,7 @@ var allDoor = [];
 var grassX = 300;
 var grassY = 400;
 var state = "game";
-var level = 0;
+var level = 1;
 var theFloor = 500;
 var resultYes;
 var copX = 20;
@@ -221,19 +221,40 @@ function dontScreen() {
 function gameScreen() {
   a = 0;
   background(0, 200, 250);
-  if (thing === 1) {
-    threeGrass(400, 400, 1);
-    threeGrass(150, 300, 2);
-    threeGrass(600, 300, 3);
-    threeGrass(850, 200, 4);
-    oneNugget(275, 475, 1);
-    oneNugget(475, 375, 2);
-    oneNugget(225, 275, 3);
-    oneNugget(675, 275, 4);
-    oneNugget(925, 175, 5);
-    oneDoor(275, 475, 1);
-    thing = 2;
+  if (level === 1) {
+    if (thing === 1) {
+      threeGrass(400, 400, 1);
+      threeGrass(150, 300, 2);
+      threeGrass(600, 300, 3);
+      threeGrass(850, 200, 4);
+      oneNugget(275, 475, 1);
+      oneNugget(475, 375, 2);
+      oneNugget(225, 275, 3);
+      oneNugget(675, 275, 4);
+      oneNugget(925, 175, 5);
+      oneDoor(275, 432, 1);
+      thing = 2;
+    }
+    if (score === 5) {
+    }
   }
+  if (level === 2) {
+    if (thing === 2) {
+      allGrass = [];
+      allNugget = [];
+      allBeer = [];
+      allDoor = [];
+      yellowX = 120;
+      yellowY = theFloor - 50;
+      copX = 20;
+      copY = 450;
+      threeGrass(400, 400, 1);
+      thing = 3;
+    }
+    if (score === 10) {
+    }
+  }
+
   push();
   textSize(30);
   fill(255, 0, 0);
@@ -365,16 +386,16 @@ class door {
   }
   display() {
     push();
-    //translate(this.x, this.y);
+    translate(this.x, this.y);
     image(doorImage, 0, 0, 50, 68);
     pop();
   }
   collide(theX, theY) {
     if (
       theX + 50 >= this.x &&
-      theX <= this.x &&
+      theX <= this.x + 50 &&
       theY + 50 >= this.y &&
-      theY <= this.y
+      theY <= this.y + 68
     ) {
       level += 1;
     }
