@@ -132,7 +132,6 @@ function keyPressed() {
   moving = false;
   if (key == " " && jumpReady == true) {
     yellowYSpeed -= yellowYJumpMax;
-    moving = true;
   }
 }
 
@@ -149,9 +148,9 @@ if (direction === "left") {
   yellowNowPic = picsLeft[yellowNowState];
 } else if (direction === "right") {
   yellowNowPic = picsRight[yellowNowState];
-} else if (direction === "jumpright") {
+} else if (direction === "right" && jumpReady == false) {
   yellowNowPic = yellowJumpR;
-} else if (direction === "jumpleft") {
+} else if (direction === "left" && jumpReady == false) {
   yellowNowPic = yellowJumpL;
 }
 
