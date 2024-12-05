@@ -3,7 +3,7 @@ var level = 1;
 var moving = false;
 
 var a = 0;
-var state = "dont";
+var state = "menu";
 var resultYes;
 var allGrass = [];
 var allNugget = [];
@@ -73,7 +73,7 @@ function preload() {
   yellowJumpL = loadImage("images/yellowjumpL.png");
   yellowJumpR = loadImage("images/yellowjumpR.png");
   ground_img = loadImage("images/grasspres_0.png");
-  // beerImage = loadImage("images/beer.png");
+  beerImage = loadImage("images/beer.png");
   // nuggetImage = loadImage("images/Chicken_Nugget.png");
   // jibs1 = loadImage("images/jibs1.png");
   // jibs2 = loadImage("images/jibs2.png");
@@ -168,12 +168,8 @@ function gameFloor(x, y) {
 
 function yellowGuy(x, y, pic) {
   push();
-  stroke(0);
-  strokeWeight(2);
-  fill(255, 255, 0);
   translate(x, y);
   image(pic, 0, 0, 50, 97);
-  //square(x, y, 50);
   pop();
 }
 
@@ -238,7 +234,7 @@ function dontScreen() {
   a = 0;
   background(0, 200, 250);
   if (state === "dont") {
-    oneBeer(375, 475, 1);
+    oneBeer(375, 450, 1);
     threeGrass(400, 400, 1);
     threeGrass(150, 300, 2);
     threeGrass(600, 300, 3);
@@ -273,7 +269,7 @@ function gameScreen() {
     pop();
 
     if (thing === 1) {
-      oneBeer(375, 475, 1);
+      oneBeer(375, 450, 1);
       threeGrass(400, 400, 1);
       threeGrass(150, 300, 2);
       threeGrass(600, 300, 3);
@@ -515,9 +511,10 @@ class beer {
     push();
     fill(185, 165, 0);
     translate(this.x, this.y);
-    ellipse(0, 0, beerWidth, beerHeight);
+    image(beerImage, 0, 0, 46, 50);
     pop();
   }
+
   collide(theX, theY) {
     if (
       theX + 50 >= this.x &&
