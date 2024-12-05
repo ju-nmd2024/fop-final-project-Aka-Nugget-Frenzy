@@ -1,5 +1,5 @@
-var thing = 5;
-var level = 5;
+var thing = 3;
+var level = 3;
 var moving = false;
 
 var a = 0;
@@ -377,6 +377,8 @@ function gameScreen() {
       copPosition.x = 20;
       copPosition.y = 450;
 
+      oneBeer(575, 450, 1);
+
       threeGrass(400, 350, 1);
       threeGrass(150, 100, 2);
       threeGrass(650, 250, 3);
@@ -406,6 +408,8 @@ function gameScreen() {
       yellowY = theFloor - 50;
       copPosition.x = 20;
       copPosition.y = 450;
+
+      oneBeer(890, 450, 1);
 
       threeGrass(200, 350, 1);
       threeGrass(50, 200, 2);
