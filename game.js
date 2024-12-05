@@ -511,6 +511,7 @@ function resetGame() {
   timer = 3;
   yellowNowPic = picsLeft[yellowNowState]; //should be picsright
   copNowPic = copPicsRight[copNowState];
+  ableToMove = true;
   yellowXSpeed = 5;
   yellowYJumpMax = 25;
   allGrass = [];
