@@ -73,7 +73,7 @@ var timer = 3;
 function preload() {
   for (let i = 0; i < 4; i++) {
     picsLeft[i] = loadImage(`images/yellowRunL${i}.png`);
-    picsRight[i] = loadImage(`images/yellowRunR${i}.png`);
+    //picsRight[i] = loadImage(`images/yellowRunR${i}.png`);
   }
   for (let i = 0; i < 3; i++) {
     copPicsLeft[i] = loadImage(`images/policejetpack${i}L.png`);
@@ -108,7 +108,7 @@ function setup() {
   copStartPos = createVector(copX, copY);
   copPosition = copStartPos.copy();
   a = 0;
-  yellowNowPic = picsRight[yellowNowState];
+  yellowNowPic = picsLeft[yellowNowState];
   copNowPic = copPicsRight[copNowState];
   caughtNowPic = yellowCaught[caughtNowState];
   yellowWidth = 46.8;
@@ -161,7 +161,7 @@ function movement() {
     //right
     yellowX += yellowXSpeed;
     moving = true;
-    yellowNowPic = picsRight[yellowNowState];
+    yellowNowPic = picsLeft[yellowNowState];
     direction = "right";
   }
 
@@ -505,7 +505,7 @@ function draw() {
 
 function resetGame() {
   timer = 3;
-  yellowNowPic = picsRight[yellowNowState];
+  yellowNowPic = picsLeft[yellowNowState];
   copNowPic = copPicsRight[copNowState];
   yellowXSpeed = 5;
   yellowYJumpMax = 25;
