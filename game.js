@@ -3,7 +3,7 @@ var level = 1;
 var moving = false;
 
 var a = 0;
-var state = "menu";
+var state = "dont";
 var resultYes;
 var allGrass = [];
 var allNugget = [];
@@ -70,6 +70,15 @@ function preload() {
     copPicsLeft[i] = loadImage(`images/policejetpack${i}L.png`);
     copPicsRight[i] = loadImage(`images/policejetpack${i}R.png`);
   }
+  for (let i = 0; i < 2; i++) {
+    jibsUp = loadImage(`images/jibs${i}.png`);
+    jibsDown = loadImage(`images/jibs${i}.png`);
+  }
+  for (let i = 0; i < 2; i++) {
+    yellowCaught1 = loadImage(`images/yellowcaught${i}.png`);
+    yellowCaught2 = loadImage(`images/yellowcaught${i}.png`);
+  }
+
   yellowJumpL = loadImage("images/yellowjumpL.png");
   yellowJumpR = loadImage("images/yellowjumpR.png");
   ground_img = loadImage("images/grasspres_0.png");
@@ -454,6 +463,7 @@ function gameScreen() {
     stopAtDist
   ) {
     currentlyMoving = false;
+    state = "menu";
   }
 
   scoreboard();
@@ -474,6 +484,8 @@ function draw() {
     resultScreen();
   }
 }
+
+function resetGame() {}
 
 class grass {
   constructor(tX, tY) {
