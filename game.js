@@ -28,7 +28,9 @@ var yellowY = theFloor - 97;
 var lastYellowY = yellowY;
 var yellowNowPic = null;
 var copNowPic = null;
+var caughtNowPic = null;
 
+var caughtNowState = 0;
 var yellowNowState = 0;
 var copNowState = 0;
 var direction = "right";
@@ -108,6 +110,7 @@ function setup() {
   a = 0;
   yellowNowPic = picsRight[yellowNowState];
   copNowPic = copPicsRight[copNowState];
+  caughtNowPic = yellowCaught[caughtNowState];
   yellowWidth = 46.8;
 }
 
@@ -197,20 +200,15 @@ function yellowGuy(x, y, pic, nowWidth) {
 
 function oppGuy(x, y, pic) {
   push();
-  stroke(0);
-  strokeWeight(2);
-  fill(0, 0, 255);
   translate(x, y);
   image(pic, 0, 0, 59, 106);
   pop();
 }
 
-function jibsGuy(x, y) {
+function caught(x, y, pic) {
   push();
-  stroke(0);
-  strokeWeight(2);
-  fill(100, 255, 100);
-  square(x, y, 50);
+  translate(x, y);
+  image(pic, 0, 0, 84.3, 131.25);
   pop();
 }
 
@@ -463,9 +461,16 @@ function gameScreen() {
     abs(dist(copPosition.x, copPosition.y, copEndPos.x, copEndPos.y)) <
     stopAtDist
   ) {
-    copNowState = 0;
+    caught(copPosition.x, copPosition.y, caughtNowPic);
     currentlyMoving = false;
-    state = "menu";
+    if (frameCount % 30 === 0) {
+      caughtNowState += 1;
+      caughtNowState = caughtNowState % 2;
+      caughtNowPic = yellowCaught[caughtNowState];
+    }
+    if (millis() - timer > time) {
+      state = "menu";
+    }
   }
 
   scoreboard();
@@ -475,9 +480,7 @@ function resultScreen() {
   image(resultImage, 0, 0, 1200, 675);
   // timer logic from : https://editor.p5js.org/IremB/sketches/jW0ZiqQNN
   if (millis() - timer > time) {
-    if (state === "result") {
-      state = "menu";
-    }
+    state = "menu";
   }
 }
 
