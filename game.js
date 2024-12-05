@@ -83,7 +83,7 @@ function preload() {
   level3Image = loadImage("images/level3.png");
   level4Image = loadImage("images/level4.png");
   level5Image = loadImage("images/level5.png");
-  // nuggetImage = loadImage("images/Chicken_Nugget.png");
+  nuggetImage = loadImage("images/Chicken_Nugget.png");
   // jibs1 = loadImage("images/jibs1.png");
   // jibs2 = loadImage("images/jibs2.png");
   // yellowCaught1 = loadImage("images/yellowcaught1.png");
@@ -255,11 +255,11 @@ function dontScreen() {
     threeGrass(150, 300, 2);
     threeGrass(600, 300, 3);
     threeGrass(850, 200, 4);
-    oneNugget(275, 475, 1);
-    oneNugget(475, 375, 2);
-    oneNugget(225, 275, 3);
-    oneNugget(675, 275, 4);
-    oneNugget(925, 175, 5);
+    oneNugget(240, 450, 1);
+    oneNugget(440, 350, 2);
+    oneNugget(200, 250, 3);
+    oneNugget(640, 250, 4);
+    oneNugget(925, 150, 5);
   }
   textSize(20);
   fill(255);
@@ -292,11 +292,11 @@ function gameScreen() {
       threeGrass(600, 300, 3);
       threeGrass(850, 200, 4);
 
-      oneNugget(275, 475, 1);
-      oneNugget(475, 375, 2);
-      oneNugget(225, 275, 3);
-      oneNugget(675, 275, 4);
-      oneNugget(925, 175, 5);
+      oneNugget(240, 450, 1);
+      oneNugget(440, 350, 2);
+      oneNugget(200, 250, 3);
+      oneNugget(640, 250, 4);
+      oneNugget(925, 150, 5);
 
       thing = 2;
     }
@@ -321,11 +321,11 @@ function gameScreen() {
       threeGrass(850, 300, 3);
       threeGrass(600, 200, 4);
 
-      oneNugget(475, 475, 1);
-      oneNugget(675, 375, 2);
-      oneNugget(425, 75, 3);
-      oneNugget(925, 275, 4);
-      oneNugget(675, 175, 5);
+      oneNugget(350, 450, 1);
+      oneNugget(650, 350, 2);
+      oneNugget(400, 50, 3);
+      oneNugget(895, 250, 4);
+      oneNugget(645, 150, 5);
 
       thing = 3;
     }
@@ -352,11 +352,11 @@ function gameScreen() {
       threeGrass(400, 100, 4);
       threeGrass(900, 200, 5);
 
-      oneNugget(375, 375, 1);
-      oneNugget(225, 225, 2);
-      oneNugget(475, 75, 3);
-      oneNugget(725, 275, 4);
-      oneNugget(975, 175, 5);
+      oneNugget(350, 350, 1);
+      oneNugget(200, 200, 2);
+      oneNugget(450, 50, 3);
+      oneNugget(700, 250, 4);
+      oneNugget(950, 150, 5);
 
       thing = 4;
     }
@@ -383,10 +383,10 @@ function gameScreen() {
       threeGrass(400, 100, 4);
       threeGrass(800, 150, 5);
 
-      oneNugget(475, 325, 1);
-      oneNugget(225, 75, 2);
-      oneNugget(475, 75, 3);
-      oneNugget(725, 225, 4);
+      oneNugget(450, 300, 1);
+      oneNugget(200, 50, 2);
+      oneNugget(450, 50, 3);
+      oneNugget(725, 200, 4);
       oneNugget(875, 125, 5);
 
       thing = 5;
@@ -502,7 +502,7 @@ class nugget {
     push();
     fill(255, 165, 0);
     translate(this.x, this.y);
-    ellipse(0, 0, nugWidth, nugHeight);
+    image(nuggetImage, 0, 0, 50, 50);
     pop();
   }
   collide(theX, theY) {
