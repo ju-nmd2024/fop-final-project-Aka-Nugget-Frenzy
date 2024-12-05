@@ -25,7 +25,10 @@ var yellowX = 120;
 var yellowY = theFloor - 97;
 var lastYellowY = yellowY;
 var yellowNowPic = null;
+var copNowPic = null;
+
 var yellowNowState = 0;
+var copNowState = 0;
 var direction = "right";
 var yellowWidth = 30;
 var yellowHeight = 60;
@@ -107,6 +110,7 @@ function setup() {
   copPosition = copStartPos.copy();
   a = 0;
   yellowNowPic = picsRight[yellowNowState];
+  copNowPic = copPicsRight[copNowState];
 }
 
 function movement() {
@@ -448,6 +452,7 @@ function gameScreen() {
   copEndPos = createVector(yellowX, yellowY);
   distToTravel = p5.Vector.sub(copEndPos, copPosition);
   distToMovePerMs = p5.Vector.div(distToTravel, moveDurationMs);
+
   push();
   gameFloor(0, theFloor);
   pop();
@@ -457,6 +462,9 @@ function gameScreen() {
   if (currentlyMoving) {
     var thisFrameMovement = p5.Vector.mult(distToMovePerMs, deltaTime);
     copPosition.add(thisFrameMovement);
+    if (copPosition.x < yellowX) {
+    } else if (copPosition.x > yellowX) {
+    }
   }
   if (
     abs(dist(copPosition.x, copPosition.y, copEndPos.x, copEndPos.y)) <
