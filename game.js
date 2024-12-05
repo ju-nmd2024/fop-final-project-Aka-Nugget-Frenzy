@@ -3,7 +3,8 @@ var level = 1;
 var moving = false;
 
 var a = 0;
-var state = "dont";
+var state = "result";
+
 var resultYes;
 var allGrass = [];
 var allNugget = [];
@@ -63,6 +64,10 @@ var beerHeight = 30;
 //counters
 var score = 0;
 
+//timer
+var timer;
+var time = 4000;
+
 function preload() {
   for (let i = 0; i < 4; i++) {
     picsLeft[i] = loadImage(`images/yellowRunL${i}.png`);
@@ -71,10 +76,6 @@ function preload() {
   for (let i = 0; i < 3; i++) {
     copPicsLeft[i] = loadImage(`images/policejetpack${i}L.png`);
     copPicsRight[i] = loadImage(`images/policejetpack${i}R.png`);
-  }
-  for (let i = 0; i < 2; i++) {
-    jibsUp = loadImage(`images/jibs${i}.png`);
-    jibsDown = loadImage(`images/jibs${i}.png`);
   }
   for (let i = 0; i < 2; i++) {
     yellowCaught1 = loadImage(`images/yellowcaught${i}.png`);
@@ -103,6 +104,7 @@ function preload() {
 }
 
 function setup() {
+  timer = millis();
   createCanvas(1200, 675);
   frameRate(60);
   copStartPos = createVector(copX, copY);
@@ -143,9 +145,17 @@ function movement() {
 
   //Left Movement
   moving = false;
+
+  if (yellowNowState % 4 === 0 || yellowNowState % 4 === 2) {
+    yellowWidth = 46.8;
+  }
+  if (yellowNowState % 4 === 1 || yellowNowState % 4 === 3) {
+    yellowWidth = 68.75;
+  }
   if (keyIsDown(65)) {
     yellowX -= yellowXSpeed;
     moving = true;
+
     yellowNowPic = picsLeft[yellowNowState];
     direction = "left";
   } else if (keyIsDown(68)) {
@@ -161,14 +171,13 @@ function movement() {
   } else if (direction === "left" && jumpReady == false) {
     yellowNowPic = yellowJumpL;
   }
+
   if (jumpReady === true) {
     if (moving == true) {
       if (frameCount % 12 === 0) {
         yellowNowState += 1;
         yellowNowState = yellowNowState % 4;
       }
-    } else if (moving == false) {
-      yellowNowState = 0;
     }
   }
 }
@@ -183,10 +192,10 @@ function gameFloor(x, y) {
   image(groundImage, x, y, 1200, 175);
 }
 
-function yellowGuy(x, y, pic) {
+function yellowGuy(x, y, pic, nowWidth) {
   push();
   translate(x, y);
-  image(pic, 0, 0, yellowWidth, 97);
+  image(pic, 0, 0, nowWidth, 97);
   pop();
 }
 
@@ -283,7 +292,7 @@ function dontScreen() {
   pop();
 
   oppGuy(copPosition.x, copPosition.y, copNowPic);
-  yellowGuy(yellowX, yellowY, yellowNowPic);
+  yellowGuy(yellowX, yellowY, yellowNowPic, yellowWidth);
   movement();
   if (keyIsDown(65) || keyIsDown(68) || keyIsDown(32)) {
     state = "game";
@@ -457,7 +466,7 @@ function gameScreen() {
   push();
   gameFloor(0, theFloor);
   pop();
-  yellowGuy(yellowX, yellowY, yellowNowPic);
+  yellowGuy(yellowX, yellowY, yellowNowPic, yellowWidth);
   oppGuy(copPosition.x, copPosition.y, copNowPic);
   movement();
 
@@ -492,6 +501,12 @@ function gameScreen() {
 
 function resultScreen() {
   image(resultImage, 0, 0, 1200, 675);
+  // timer logic from : https://editor.p5js.org/IremB/sketches/jW0ZiqQNN
+  if (millis() - timer > time) {
+    if (state === "result") {
+      state = "menu";
+    }
+  }
 }
 
 function draw() {
