@@ -1,6 +1,7 @@
 var thing = 1;
 var level = 1;
 var moving = false;
+var ableToMove = true;
 
 var a = 0;
 var state = "menu";
@@ -108,7 +109,7 @@ function setup() {
   copStartPos = createVector(copX, copY);
   copPosition = copStartPos.copy();
   a = 0;
-  yellowNowPic = picsLeft[yellowNowState];
+  yellowNowPic = picsLeft[yellowNowState]; //should be picsright
   copNowPic = copPicsRight[copNowState];
   caughtNowPic = yellowCaught[caughtNowState];
   yellowWidth = 46.8;
@@ -151,18 +152,20 @@ function movement() {
   if (yellowNowState % 4 === 1 || yellowNowState % 4 === 3) {
     yellowWidth = 68.75;
   }
-  if (keyIsDown(65)) {
-    yellowX -= yellowXSpeed;
-    moving = true;
+  if (ableToMove === true) {
+    if (keyIsDown(65)) {
+      yellowX -= yellowXSpeed;
+      moving = true;
 
-    yellowNowPic = picsLeft[yellowNowState];
-    direction = "left";
-  } else if (keyIsDown(68)) {
-    //right
-    yellowX += yellowXSpeed;
-    moving = true;
-    yellowNowPic = picsLeft[yellowNowState];
-    direction = "right";
+      yellowNowPic = picsLeft[yellowNowState];
+      direction = "left";
+    } else if (keyIsDown(68)) {
+      //right
+      yellowX += yellowXSpeed;
+      moving = true;
+      yellowNowPic = picsLeft[yellowNowState]; //should be picsright
+      direction = "right";
+    }
   }
 
   if (direction === "right" && jumpReady == false) {
@@ -461,6 +464,7 @@ function gameScreen() {
     abs(dist(copPosition.x, copPosition.y, copEndPos.x, copEndPos.y)) <
     stopAtDist
   ) {
+    ableToMove = false;
     caught(copPosition.x, copPosition.y, caughtNowPic);
     copNowPic = copCaughtInvis;
     yellowNowPic = yellowCaughtInvis;
@@ -505,7 +509,7 @@ function draw() {
 
 function resetGame() {
   timer = 3;
-  yellowNowPic = picsLeft[yellowNowState];
+  yellowNowPic = picsLeft[yellowNowState]; //should be picsright
   copNowPic = copPicsRight[copNowState];
   yellowXSpeed = 5;
   yellowYJumpMax = 25;
