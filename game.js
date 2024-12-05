@@ -462,6 +462,8 @@ function gameScreen() {
     stopAtDist
   ) {
     caught(copPosition.x, copPosition.y, caughtNowPic);
+    copNowPic = copCaughtInvis;
+    yellowNowPic = yellowCaughtInvis;
     currentlyMoving = false;
     if (frameCount % 30 === 0) {
       caughtNowState += 1;
@@ -503,6 +505,8 @@ function draw() {
 
 function resetGame() {
   timer = 3;
+  yellowNowPic = picsRight[yellowNowState];
+  copNowPic = copPicsRight[copNowState];
   yellowXSpeed = 5;
   yellowYJumpMax = 25;
   allGrass = [];
