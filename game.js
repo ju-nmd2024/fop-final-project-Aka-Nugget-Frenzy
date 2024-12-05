@@ -73,7 +73,7 @@ var timer = 3;
 function preload() {
   for (let i = 0; i < 4; i++) {
     picsLeft[i] = loadImage(`images/yellowRunL${i}.png`);
-    picsRight[i] = loadImage(`images/yellowRun${i}R.png`);
+    picsRight[i] = loadImage(`images/yellowRunR${i}.png`);
   }
   for (let i = 0; i < 3; i++) {
     copPicsLeft[i] = loadImage(`images/policejetpack${i}L.png`);
