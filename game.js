@@ -1,5 +1,5 @@
-var thing = 1;
-var level = 1;
+var thing = 4;
+var level = 4;
 var moving = false;
 
 var a = 0;
@@ -77,6 +77,12 @@ function preload() {
   startImage = loadImage("images/StartScreen.png");
   startButton = loadImage("images/startButton.png");
   resultImage = loadImage("images/wonScreen.png");
+  groundImage = loadImage("images/groundImage.png");
+  level1Image = loadImage("images/level1.png");
+  level2Image = loadImage("images/level2.png");
+  level3Image = loadImage("images/level3.png");
+  level4Image = loadImage("images/level4.png");
+  level5Image = loadImage("images/level5.png");
   // nuggetImage = loadImage("images/Chicken_Nugget.png");
   // jibs1 = loadImage("images/jibs1.png");
   // jibs2 = loadImage("images/jibs2.png");
@@ -161,9 +167,7 @@ function keyPressed() {
 }
 
 function gameFloor(x, y) {
-  noStroke();
-  fill(0, 255, 0);
-  rect(x, y, 1200, 675);
+  image(groundImage, x, y, 1200, 175);
 }
 
 function yellowGuy(x, y, pic) {
@@ -228,7 +232,6 @@ function scoreboard() {
 }
 
 function menuScreen() {
-  background(0, 200, 250);
   image(startImage, 0, 0, 1200, 675);
   image(startButton, 450, 210, 300, 130);
 
@@ -244,7 +247,8 @@ function menuScreen() {
 }
 function dontScreen() {
   a = 0;
-  background(0, 200, 250);
+  image(level1Image, 0, 0, 1200, 500);
+
   if (state === "dont") {
     oneBeer(375, 450, 1);
     threeGrass(400, 400, 1);
@@ -258,7 +262,8 @@ function dontScreen() {
     oneNugget(925, 175, 5);
   }
   textSize(20);
-  text("Don't steal the nuggets...", 50, 400);
+  fill(255);
+  text("Don't steal the nuggets...", 50, 390);
   push();
   gameFloor(0, theFloor);
   pop();
@@ -272,12 +277,12 @@ function dontScreen() {
 }
 function gameScreen() {
   a = 0;
-  background(0, 200, 250);
   if (level === 1) {
+    image(level1Image, 0, 0, 1200, 500);
     push();
     textSize(30);
     fill(255, 0, 0);
-    text("I WARNED YOU", 50, 400);
+    text("I WARNED YOU", 50, 390);
     pop();
 
     if (thing === 1) {
@@ -300,6 +305,7 @@ function gameScreen() {
     }
   }
   if (level === 2) {
+    image(level2Image, 0, 0, 1200, 500);
     if (thing === 2) {
       allGrass = [];
       allNugget = [];
@@ -329,6 +335,7 @@ function gameScreen() {
     }
   }
   if (level === 3) {
+    image(level3Image, 0, 0, 1200, 500);
     if (thing === 3) {
       allGrass = [];
       allNugget = [];
@@ -359,6 +366,7 @@ function gameScreen() {
     }
   }
   if (level === 4) {
+    image(level4Image, 0, 0, 1200, 500);
     if (thing === 4) {
       allGrass = [];
       allNugget = [];
@@ -388,6 +396,7 @@ function gameScreen() {
     }
   }
   if (level === 5) {
+    image(level5Image, 0, 0, 1200, 500);
     if (thing === 5) {
       allGrass = [];
       allNugget = [];
