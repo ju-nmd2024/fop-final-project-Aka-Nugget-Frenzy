@@ -13,6 +13,8 @@ var picsLeft = [];
 var picsRight = [];
 var picsJumpRight = [];
 var picsJumpLeft = [];
+var copPicsLeft = [];
+var copPicsRight = [];
 
 var grassX = 300;
 var grassY = 400;
@@ -64,7 +66,10 @@ function preload() {
     picsLeft[i] = loadImage(`images/yellowRunL${i}.png`);
     picsRight[i] = loadImage(`images/yellowRun${i}R.png`);
   }
-
+  for (let i = 0; i < 3; i++) {
+    copPicsLeft[i] = loadImage(`images/policejetpack${i}L.png`);
+    copPicsRight[i] = loadImage(`images/policejetpack${i}R.png`);
+  }
   yellowJumpL = loadImage("images/yellowjumpL.png");
   yellowJumpR = loadImage("images/yellowjumpR.png");
   ground_img = loadImage("images/grasspres_0.png");
@@ -154,8 +159,6 @@ function keyPressed() {
     yellowYSpeed -= yellowYJumpMax;
   }
 }
-
-//framecount
 
 function gameFloor(x, y) {
   noStroke();
