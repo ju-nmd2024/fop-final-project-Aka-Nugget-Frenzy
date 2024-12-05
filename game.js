@@ -116,6 +116,7 @@ function setup() {
 }
 
 function movement() {
+  //Character Movement
   yellowY = yellowY + yellowYSpeed;
   if (yellowY >= theFloor - 97) {
     jumpReady = true;
@@ -125,18 +126,22 @@ function movement() {
     jumpReady = false;
     yellowYSpeed += 2;
   }
+  //grass(platforms) collision
   for (let i = 0; i < allGrass.length; i++) {
     allGrass[i].collide(yellowX, yellowY, lastYellowY);
     allGrass[i].display();
   }
+  //nugget collision
   for (let i = 0; i < allNugget.length; i++) {
     allNugget[i].collide(yellowX, yellowY);
     allNugget[i].display();
   }
+  //beer collision
   for (let i = 0; i < allBeer.length; i++) {
     allBeer[i].collide(yellowX, yellowY);
     allBeer[i].display();
   }
+  //door collision
   for (let i = 0; i < allDoor.length; i++) {
     allDoor[i].collide(yellowX, yellowY);
     allDoor[i].display();
@@ -160,14 +165,14 @@ function movement() {
       yellowNowPic = picsLeft[yellowNowState];
       direction = "left";
     } else if (keyIsDown(68)) {
-      //right
+      //right movement
       yellowX += yellowXSpeed;
       moving = true;
       yellowNowPic = picsLeft[yellowNowState]; //should be picsright
       direction = "right";
     }
   }
-
+  //jumping
   if (direction === "right" && jumpReady == false) {
     yellowNowPic = yellowJumpR;
   } else if (direction === "left" && jumpReady == false) {
@@ -432,6 +437,7 @@ function gameScreen() {
   if (level === 6) {
     state = "result";
   }
+  //cop movement (with animation)
   copEndPos = createVector(yellowX, yellowY);
   distToTravel = p5.Vector.sub(copEndPos, copPosition);
   distToMovePerMs = p5.Vector.div(distToTravel, moveDurationMs);
@@ -474,6 +480,7 @@ function gameScreen() {
       caughtNowState = caughtNowState % 2;
       caughtNowPic = yellowCaught[caughtNowState];
     }
+    //timer, code inspired by https://editor.p5js.org/marynotari/sketches/S1T2ZTMp-
     if (frameCount % 60 === 0 && timer > 0) {
       timer--;
     }
@@ -507,6 +514,7 @@ function draw() {
   }
 }
 
+//reset
 function resetGame() {
   timer = 3;
   yellowNowPic = picsLeft[yellowNowState]; //should be picsright
@@ -523,6 +531,8 @@ function resetGame() {
   copPosition.x = 20;
   copPosition.y = 394;
 }
+
+//classes
 
 class grass {
   constructor(tX, tY) {
