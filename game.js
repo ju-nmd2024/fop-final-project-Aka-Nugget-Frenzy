@@ -3,7 +3,7 @@ var level = 1;
 var moving = false;
 
 var a = 0;
-var state = "result";
+var state = "menu";
 
 var resultYes;
 var allGrass = [];
@@ -16,6 +16,7 @@ var picsJumpRight = [];
 var picsJumpLeft = [];
 var copPicsLeft = [];
 var copPicsRight = [];
+var yellowCaught = [];
 
 var grassX = 300;
 var grassY = 400;
@@ -78,8 +79,7 @@ function preload() {
     copPicsRight[i] = loadImage(`images/policejetpack${i}R.png`);
   }
   for (let i = 0; i < 2; i++) {
-    yellowCaught1 = loadImage(`images/yellowcaught${i}.png`);
-    yellowCaught2 = loadImage(`images/yellowcaught${i}.png`);
+    yellowCaught[i] = loadImage(`images/yellowcaught${i}.png`);
   }
 
   yellowJumpL = loadImage("images/yellowjumpL.png");
@@ -96,10 +96,6 @@ function preload() {
   level4Image = loadImage("images/level4.png");
   level5Image = loadImage("images/level5.png");
   nuggetImage = loadImage("images/Chicken_Nugget.png");
-  // jibs1 = loadImage("images/jibs1.png");
-  // jibs2 = loadImage("images/jibs2.png");
-  // yellowCaught1 = loadImage("images/yellowcaught1.png");
-  // yellowCaught2 = loadImage("images/yellowcaught2.png");
   doorImage = loadImage("images/exitdoor.png");
 }
 
@@ -270,9 +266,13 @@ function menuScreen() {
 }
 function dontScreen() {
   a = 0;
+  score = 0;
+  level = 1;
+  thing = 1;
   image(level1Image, 0, 0, 1200, 500);
-
+  currentlyMoving = true;
   if (state === "dont") {
+    resetGame();
     oneBeer(375, 450, 1);
     threeGrass(400, 400, 1);
     threeGrass(150, 300, 2);
@@ -309,6 +309,7 @@ function gameScreen() {
     pop();
 
     if (thing === 1) {
+      resetGame();
       oneBeer(375, 450, 1);
       threeGrass(400, 400, 1);
       threeGrass(150, 300, 2);
@@ -330,14 +331,7 @@ function gameScreen() {
   if (level === 2) {
     image(level2Image, 0, 0, 1200, 500);
     if (thing === 2) {
-      allGrass = [];
-      allNugget = [];
-      allBeer = [];
-      allDoor = [];
-      yellowX = 120;
-      yellowY = theFloor - 50;
-      copPosition.x = 20;
-      copPosition.y = 450;
+      resetGame();
 
       oneBeer(345, 50, 1);
 
@@ -362,14 +356,7 @@ function gameScreen() {
   if (level === 3) {
     image(level3Image, 0, 0, 1200, 500);
     if (thing === 3) {
-      allGrass = [];
-      allNugget = [];
-      allBeer = [];
-      allDoor = [];
-      yellowX = 120;
-      yellowY = theFloor - 50;
-      copPosition.x = 20;
-      copPosition.y = 450;
+      resetGame();
 
       oneBeer(1010, 150, 1);
 
@@ -395,14 +382,7 @@ function gameScreen() {
   if (level === 4) {
     image(level4Image, 0, 0, 1200, 500);
     if (thing === 4) {
-      allGrass = [];
-      allNugget = [];
-      allBeer = [];
-      allDoor = [];
-      yellowX = 120;
-      yellowY = theFloor - 50;
-      copPosition.x = 20;
-      copPosition.y = 450;
+      resetGame();
 
       oneBeer(575, 450, 1);
 
@@ -427,15 +407,7 @@ function gameScreen() {
   if (level === 5) {
     image(level5Image, 0, 0, 1200, 500);
     if (thing === 5) {
-      allGrass = [];
-      allNugget = [];
-      allBeer = [];
-      allDoor = [];
-      yellowX = 120;
-      yellowY = theFloor - 50;
-      copPosition.x = 20;
-      copPosition.y = 450;
-
+      resetGame();
       oneBeer(890, 450, 1);
 
       threeGrass(200, 350, 1);
@@ -521,7 +493,16 @@ function draw() {
   }
 }
 
-function resetGame() {}
+function resetGame() {
+  allGrass = [];
+  allNugget = [];
+  allBeer = [];
+  allDoor = [];
+  yellowX = 120;
+  yellowY = theFloor - 97;
+  copPosition.x = 20;
+  copPosition.y = 394;
+}
 
 class grass {
   constructor(tX, tY) {
@@ -538,11 +519,11 @@ class grass {
     if (
       theX + 50 >= this.x &&
       theX <= this.x + 50 &&
-      theY >= this.y - 60 &&
-      theY + 50 <= this.y &&
+      theY >= this.y - 110 &&
+      theY + 97 <= this.y &&
       theY >= lastTheY
     ) {
-      yellowY = this.y - 50;
+      yellowY = this.y - 97;
       yellowYSpeed = 0;
       jumpReady = true;
     }
