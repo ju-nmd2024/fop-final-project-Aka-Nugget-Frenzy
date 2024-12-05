@@ -3,7 +3,7 @@ var level = 1;
 var moving = false;
 
 var a = 0;
-var state = "menu";
+var state = "game";
 var resultYes;
 var allGrass = [];
 var allNugget = [];
@@ -76,6 +76,7 @@ function preload() {
   beerImage = loadImage("images/beer.png");
   startImage = loadImage("images/StartScreen.png");
   startButton = loadImage("images/startButton.png");
+  resultImage = loadImage("images/wonScreen.png");
   // nuggetImage = loadImage("images/Chicken_Nugget.png");
   // jibs1 = loadImage("images/jibs1.png");
   // jibs2 = loadImage("images/jibs2.png");
@@ -442,12 +443,7 @@ function gameScreen() {
 }
 
 function resultScreen() {
-  background(0, 200, 250);
-  push();
-  textSize(30);
-  fill(0, 255, 0);
-  text("YOU WON", 50, 400);
-  pop();
+  image(resultImage, 0, 0, 1200, 675);
 }
 
 function draw() {
