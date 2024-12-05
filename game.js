@@ -47,7 +47,7 @@ var copEndPos;
 
 const stopAtDist = 50; //so the cop stops before going into yellow guy
 var distToTravel; //calculates how much the cop needs to travel to yellow guy
-const moveDurationS = 1; // if you stand still, the cop will catch you in this many seconds
+const moveDurationS = 2; // if you stand still, the cop will catch you in this many seconds
 const moveDurationMs = moveDurationS * 1000;
 var distToMovePerMs;
 var currentlyMoving = true;
@@ -65,11 +65,10 @@ var beerWidth = 15;
 var beerHeight = 30;
 
 //counters
-var score = 0;
+var score = 20;
 
 //timer
-var timer;
-var time = 4000;
+var timer = 3;
 
 function preload() {
   for (let i = 0; i < 4; i++) {
@@ -99,10 +98,11 @@ function preload() {
   level5Image = loadImage("images/level5.png");
   nuggetImage = loadImage("images/Chicken_Nugget.png");
   doorImage = loadImage("images/exitdoor.png");
+  copCaughtInvis = loadImage("images/oppCaught.png");
+  yellowCaughtInvis = loadImage("images/yellowCaught.png");
 }
 
 function setup() {
-  timer = millis();
   createCanvas(1200, 675);
   frameRate(60);
   copStartPos = createVector(copX, copY);
@@ -468,7 +468,10 @@ function gameScreen() {
       caughtNowState = caughtNowState % 2;
       caughtNowPic = yellowCaught[caughtNowState];
     }
-    if (millis() - timer > time) {
+    if (frameCount % 60 === 0 && timer > 0) {
+      timer--;
+    }
+    if (timer === 0) {
       state = "menu";
     }
   }
@@ -478,8 +481,10 @@ function gameScreen() {
 
 function resultScreen() {
   image(resultImage, 0, 0, 1200, 675);
-  // timer logic from : https://editor.p5js.org/IremB/sketches/jW0ZiqQNN
-  if (millis() - timer > time) {
+  if (frameCount % 60 === 0 && timer > 0) {
+    timer--;
+  }
+  if (timer === 0) {
     state = "menu";
   }
 }
@@ -497,6 +502,9 @@ function draw() {
 }
 
 function resetGame() {
+  timer = 3;
+  yellowXSpeed = 5;
+  yellowYJumpMax = 25;
   allGrass = [];
   allNugget = [];
   allBeer = [];
