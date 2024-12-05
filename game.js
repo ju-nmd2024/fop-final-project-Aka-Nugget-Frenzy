@@ -1,5 +1,5 @@
-var thing = 4;
-var level = 4;
+var thing = 5;
+var level = 5;
 var moving = false;
 
 var a = 0;
@@ -386,8 +386,8 @@ function gameScreen() {
       oneNugget(450, 300, 1);
       oneNugget(200, 50, 2);
       oneNugget(450, 50, 3);
-      oneNugget(725, 200, 4);
-      oneNugget(875, 125, 5);
+      oneNugget(700, 200, 4);
+      oneNugget(850, 100, 5);
 
       thing = 5;
     }
@@ -412,11 +412,11 @@ function gameScreen() {
       threeGrass(550, 300, 3);
       threeGrass(300, 100, 4);
 
-      oneNugget(475, 475, 1);
-      oneNugget(275, 325, 2);
-      oneNugget(125, 175, 3);
-      oneNugget(375, 75, 4);
-      oneNugget(625, 275, 5);
+      oneNugget(990, 450, 1);
+      oneNugget(250, 300, 2);
+      oneNugget(100, 150, 3);
+      oneNugget(350, 50, 4);
+      oneNugget(600, 250, 5);
 
       thing = 6;
     }
