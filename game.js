@@ -74,12 +74,11 @@ function preload() {
   yellowJumpR = loadImage("images/yellowjumpR.png");
   ground_img = loadImage("images/grasspres_0.png");
   beerImage = loadImage("images/beer.png");
+  startImage = loadImage("images/StartScreen.png");
+  startButton = loadImage("images/startButton.png");
   // nuggetImage = loadImage("images/Chicken_Nugget.png");
   // jibs1 = loadImage("images/jibs1.png");
   // jibs2 = loadImage("images/jibs2.png");
-  // policeJetMaxR = loadImage("images/policejetpackMax.png");
-  // policeJetMinR = loadImage("images/policejetpackMin.png");
-  // policeJetOffR = loadImage("images/policejetpackoff.png");
   // yellowCaught1 = loadImage("images/yellowcaught1.png");
   // yellowCaught2 = loadImage("images/yellowcaught2.png");
   doorImage = loadImage("images/exitdoor.png");
@@ -229,6 +228,18 @@ function scoreboard() {
 
 function menuScreen() {
   background(0, 200, 250);
+  image(startImage, 0, 0, 1200, 675);
+  image(startButton, 450, 210, 300, 130);
+
+  if (
+    mouseX >= 460 &&
+    mouseX <= 740 &&
+    mouseY >= 220 &&
+    mouseY <= 330 &&
+    mouseIsPressed === true
+  ) {
+    state = "dont";
+  }
 }
 function dontScreen() {
   a = 0;
