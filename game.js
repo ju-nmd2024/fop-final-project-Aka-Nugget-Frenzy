@@ -1,9 +1,9 @@
-var thing = 3;
-var level = 3;
+var thing = 1;
+var level = 1;
 var moving = false;
 
 var a = 0;
-var state = "game";
+var state = "menu";
 var resultYes;
 var allGrass = [];
 var allNugget = [];
@@ -316,6 +316,8 @@ function gameScreen() {
       copPosition.x = 20;
       copPosition.y = 450;
 
+      oneBeer(345, 50, 1);
+
       threeGrass(600, 400, 1);
       threeGrass(350, 100, 2);
       threeGrass(850, 300, 3);
@@ -345,6 +347,8 @@ function gameScreen() {
       yellowY = theFloor - 50;
       copPosition.x = 20;
       copPosition.y = 450;
+
+      oneBeer(1010, 150, 1);
 
       threeGrass(300, 400, 1);
       threeGrass(150, 250, 2);
