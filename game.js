@@ -20,7 +20,7 @@ var grassX = 300;
 var grassY = 400;
 var theFloor = 500;
 var copX = 20;
-var copY = 450;
+var copY = 394;
 var yellowX = 120;
 var yellowY = theFloor - 97;
 var lastYellowY = yellowY;
@@ -30,8 +30,7 @@ var copNowPic = null;
 var yellowNowState = 0;
 var copNowState = 0;
 var direction = "right";
-var yellowWidth = 30;
-var yellowHeight = 60;
+var yellowWidth;
 
 var yellowYSpeed = 0;
 var yellowYJumpMax = 25;
@@ -111,6 +110,7 @@ function setup() {
   a = 0;
   yellowNowPic = picsRight[yellowNowState];
   copNowPic = copPicsRight[copNowState];
+  yellowWidth = 46.8;
 }
 
 function movement() {
@@ -163,7 +163,7 @@ function movement() {
   }
   if (jumpReady === true) {
     if (moving == true) {
-      if (frameCount % 6 === 0) {
+      if (frameCount % 12 === 0) {
         yellowNowState += 1;
         yellowNowState = yellowNowState % 4;
       }
@@ -186,16 +186,17 @@ function gameFloor(x, y) {
 function yellowGuy(x, y, pic) {
   push();
   translate(x, y);
-  image(pic, 0, 0, 50, 97);
+  image(pic, 0, 0, yellowWidth, 97);
   pop();
 }
 
-function oppGuy(x, y) {
+function oppGuy(x, y, pic) {
   push();
   stroke(0);
   strokeWeight(2);
   fill(0, 0, 255);
-  square(x, y, 50);
+  translate(x, y);
+  image(pic, 0, 0, 59, 106);
   pop();
 }
 
@@ -281,7 +282,7 @@ function dontScreen() {
   gameFloor(0, theFloor);
   pop();
 
-  oppGuy(copPosition.x, copPosition.y);
+  oppGuy(copPosition.x, copPosition.y, copNowPic);
   yellowGuy(yellowX, yellowY, yellowNowPic);
   movement();
   if (keyIsDown(65) || keyIsDown(68) || keyIsDown(32)) {
@@ -457,19 +458,31 @@ function gameScreen() {
   gameFloor(0, theFloor);
   pop();
   yellowGuy(yellowX, yellowY, yellowNowPic);
-  oppGuy(copPosition.x, copPosition.y);
+  oppGuy(copPosition.x, copPosition.y, copNowPic);
   movement();
+
   if (currentlyMoving) {
     var thisFrameMovement = p5.Vector.mult(distToMovePerMs, deltaTime);
     copPosition.add(thisFrameMovement);
     if (copPosition.x < yellowX) {
+      if (frameCount % 12 === 0) {
+        copNowState += 1;
+        copNowState = copNowState % 3;
+        copNowPic = copPicsRight[copNowState];
+      }
     } else if (copPosition.x > yellowX) {
+      if (frameCount % 12 === 0) {
+        copNowState += 1;
+        copNowState = copNowState % 3;
+        copNowPic = copPicsLeft[copNowState];
+      }
     }
   }
   if (
     abs(dist(copPosition.x, copPosition.y, copEndPos.x, copEndPos.y)) <
     stopAtDist
   ) {
+    copNowState = 0;
     currentlyMoving = false;
     state = "menu";
   }
