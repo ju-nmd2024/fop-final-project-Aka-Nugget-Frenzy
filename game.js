@@ -150,12 +150,13 @@ function movement() {
 
   //Left Movement
   moving = false;
-
-  if (yellowNowState % 4 === 0 || yellowNowState % 4 === 2) {
-    yellowWidth = 46.8;
-  }
-  if (yellowNowState % 4 === 1 || yellowNowState % 4 === 3) {
-    yellowWidth = 68.75;
+  if (yellowNowPic == picsLeft[yellowNowState] || picsRight[yellowNowState]) {
+    if (yellowNowState % 4 === 0 || yellowNowState % 4 === 2) {
+      yellowWidth = 46.8;
+    }
+    if (yellowNowState % 4 === 1 || yellowNowState % 4 === 3) {
+      yellowWidth = 68.75;
+    }
   }
   if (ableToMove === true) {
     if (keyIsDown(65)) {
@@ -175,11 +176,18 @@ function movement() {
   //jumping
   if (direction === "right" && jumpReady == false) {
     yellowNowPic = yellowJumpR;
+    yellowWidth = 81.25;
   } else if (direction === "left" && jumpReady == false) {
     yellowNowPic = yellowJumpL;
+    yellowWidth = 81.25;
   }
 
   if (jumpReady === true) {
+    if (direction === "right") {
+      yellowNowPic = picsRight[yellowNowState];
+    } else if (direction === "left") {
+      yellowNowPic = picsLeft[yellowNowState];
+    }
     if (moving == true) {
       if (frameCount % 12 === 0) {
         yellowNowState += 1;
