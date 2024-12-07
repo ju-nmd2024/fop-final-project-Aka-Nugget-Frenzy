@@ -471,6 +471,9 @@ function gameScreen() {
     stopAtDist
   ) {
     ableToMove = false;
+    jumpReady = false;
+    yellowx = copPosition.x;
+    yellowY = copPosition.y;
     caught(copPosition.x, copPosition.y, caughtNowPic);
     copNowPic = copCaughtInvis;
     yellowNowPic = yellowCaughtInvis;
