@@ -39,7 +39,7 @@ var yellowWidth;
 
 var yellowYSpeed = 0;
 var yellowYJumpMax = 25;
-var yellowXSpeed = 7;
+var yellowXSpeed = 5;
 var jumpReady = true;
 
 var copStartPos;
